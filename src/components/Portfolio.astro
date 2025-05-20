@@ -1,0 +1,619 @@
+---
+// Datos para el portafolio de eventos
+const portfolioEvents = [
+  {
+    id: "event1",
+    title: "Festival de Música Electrónica",
+    category: "Conciertos",
+    imageUrl: "/portfolio/evento-1.jpg",
+    description:
+      "Sistema de sonido line array con iluminación robótica para festival con 5000 asistentes.",
+    size: "large", // Define el tamaño de la imagen en el grid
+  },
+  {
+    id: "event2",
+    title: "Conferencia Empresarial",
+    category: "Corporativo",
+    imageUrl: "/portfolio/evento-2.jpg",
+    description:
+      "Evento corporativo con pantallas LED, iluminación ambiental y sistema de sonido distribuido.",
+    size: "medium",
+  },
+  {
+    id: "event3",
+    title: "Gala Benéfica",
+    category: "Especiales",
+    imageUrl: "/portfolio/evento-3.jpg",
+    description:
+      "Iluminación arquitectónica y escénica para gala en salón histórico.",
+    size: "small",
+  },
+  {
+    id: "event4",
+    title: "Concierto Sinfónico",
+    category: "Conciertos",
+    imageUrl: "/portfolio/evento-4.jpg",
+    description:
+      "Sistema de amplificación para orquesta en vivo con 80 micrófonos y monitorización.",
+    size: "medium",
+  },
+  {
+    id: "event5",
+    title: "Lanzamiento de Producto",
+    category: "Corporativo",
+    imageUrl: "/portfolio/evento-5.jpg",
+    description:
+      "Mapping 3D sobre producto con efectos especiales y sonido envolvente.",
+    size: "small",
+  },
+  {
+    id: "event6",
+    title: "Festival de Cine",
+    category: "Especiales",
+    imageUrl: "/portfolio/evento-6.jpg",
+    description:
+      "Proyección en pantalla gigante con sistema de sonido Dolby Atmos.",
+    size: "large",
+  },
+  {
+    id: "event7",
+    title: "Boda Premium",
+    category: "Sociales",
+    imageUrl: "/portfolio/evento-7.jpg",
+    description:
+      "Iluminación ambiental, pista de baile LED y sistema de sonido discreto.",
+    size: "medium",
+  },
+  {
+    id: "event8",
+    title: "Congreso Médico",
+    category: "Corporativo",
+    imageUrl: "/portfolio/evento-8.jpg",
+    description:
+      "Sistema de conferencias con traducción simultánea y streaming en vivo.",
+    size: "medium",
+  },
+  {
+    id: "event9",
+    title: "Festival de Teatro",
+    category: "Culturales",
+    imageUrl: "/portfolio/evento-9.jpg",
+    description:
+      "Iluminación teatral, efectos especiales y sonido direccional para festival internacional de teatro.",
+    size: "large",
+  },
+  {
+    id: "event10",
+    title: "Espectáculo de Danza",
+    category: "Culturales",
+    imageUrl: "/portfolio/evento-10.jpg",
+    description:
+      "Diseño de iluminación coreografiada y sistema de sonido personalizado para espectáculo de ballet contemporáneo.",
+    size: "medium",
+  },
+  {
+    id: "event11",
+    title: "Exposición de Arte Digital",
+    category: "Especiales",
+    imageUrl: "/portfolio/evento-11.jpg",
+    description:
+      "Instalación audiovisual inmersiva con proyecciones sincronizadas y sonido espacial para exposición de arte digital.",
+    size: "small",
+  },
+  {
+    id: "event12",
+    title: "Desfile de Moda",
+    category: "Especiales",
+    imageUrl: "/portfolio/evento-12.jpg",
+    description:
+      "Pasarela con iluminación de seguimiento, efectos visuales y sonido sincronizado para desfile de alta costura.",
+    size: "medium",
+  },
+  {
+    id: "event13",
+    title: "Summit Tecnológico",
+    category: "Corporativo",
+    imageUrl: "/portfolio/evento-13.jpg",
+    description:
+      "Escenario principal con pantallas LED curvas, sonido multipunto y sistema de presentación interactiva.",
+    size: "large",
+  },
+  {
+    id: "event14",
+    title: "Concierto al Aire Libre",
+    category: "Conciertos",
+    imageUrl: "/portfolio/evento-14.jpg",
+    description:
+      "Montaje completo de escenario, iluminación y sonido para concierto en parque con 10.000 asistentes.",
+    size: "small",
+  },
+  {
+    id: "event15",
+    title: "Inauguración Gubernamental",
+    category: "Institucionales",
+    imageUrl: "/portfolio/evento-15.jpg",
+    description:
+      "Producción audiovisual completa para ceremonia de inauguración con autoridades y transmisión en directo.",
+    size: "medium",
+  },
+];
+
+// Nota importante: Las imágenes son referencias y se deben crear o agregar en la carpeta public/portfolio/
+---
+
+<section id="portfolio" class="portfolio">
+  <div class="portfolio-container">
+    <div class="section-title">
+      <h2>Nuestros Eventos</h2>
+      <p>Explora algunos de los proyectos en los que hemos trabajado</p>
+    </div>
+
+    <div class="portfolio-grid">
+      {
+        portfolioEvents.map((event) => (
+          <div class={`portfolio-item ${event.size}`} data-id={event.id}>
+            <div class="portfolio-image">
+              <img src={event.imageUrl} alt={event.title} />
+              <div class="portfolio-overlay">
+                <h3>{event.title}</h3>
+                <span class="category">{event.category}</span>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Modal para ver la imagen ampliada -->
+  <div id="portfolioModal" class="portfolio-modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <div class="modal-image-container">
+        <img id="modalImage" src="" alt="" />
+      </div>
+      <div class="modal-details">
+        <h3 id="modalTitle"></h3>
+        <p id="modalCategory"></p>
+        <p id="modalDescription"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .portfolio {
+    background-color: var(--color-light);
+    padding: 4rem 0;
+  }
+
+  .portfolio-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-flow: dense;
+    gap: 8px;
+    margin-top: 2rem;
+    max-width: 100%;
+  }
+
+  .portfolio-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    margin: 0;
+  }
+
+  .portfolio-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+  }
+
+  /* Tamaños para el layout tipo bento */
+  .portfolio-item.small {
+    grid-column: span 2;
+    grid-row: span 2;
+    height: 180px;
+  }
+
+  .portfolio-item.medium {
+    grid-column: span 2;
+    grid-row: span 3;
+    height: 270px;
+  }
+
+  .portfolio-item.large {
+    grid-column: span 4;
+    grid-row: span 3;
+    height: 270px;
+  }
+
+  .portfolio-image {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .portfolio-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .portfolio-item:hover .portfolio-image img {
+    transform: scale(1.05);
+  }
+
+  .portfolio-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: white;
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .portfolio-overlay h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.2rem;
+  }
+
+  .portfolio-overlay .category {
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+
+  /* Modal styles */
+  .portfolio-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .portfolio-modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+  }
+
+  .modal-content {
+    position: relative;
+    background-color: white;
+    max-width: 900px;
+    width: 90%;
+    margin: auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: scale(0.9);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .portfolio-modal.active .modal-content {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: var(--color-dark);
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    transition: color 0.3s;
+  }
+
+  .close-modal:hover {
+    color: var(--color-primary);
+  }
+
+  .modal-image-container {
+    width: 100%;
+    max-height: 500px;
+    overflow: hidden;
+  }
+
+  .modal-image-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .modal-details {
+    padding: 20px;
+  }
+
+  .modal-details h3 {
+    color: var(--color-primary);
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+  }
+
+  .modal-details p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+
+  #modalCategory {
+    color: var(--color-secondary);
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 1200px) {
+    .portfolio-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .portfolio-item.large {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .portfolio-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .portfolio-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+
+    .portfolio-item.large,
+    .portfolio-item.medium,
+    .portfolio-item.small {
+      grid-column: span 1;
+      grid-row: span 1;
+      height: 200px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .portfolio-grid {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    .portfolio-item.large,
+    .portfolio-item.medium,
+    .portfolio-item.small {
+      grid-column: span 1;
+      height: 200px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Datos de los eventos para usar en JavaScript
+    const portfolioEvents = [
+      {
+        id: "event1",
+        title: "Festival de Música Electrónica",
+        category: "Conciertos",
+        imageUrl: "/portfolio/evento-1.jpg",
+        description:
+          "Sistema de sonido line array con iluminación robótica para festival con 5000 asistentes.",
+      },
+      {
+        id: "event2",
+        title: "Conferencia Empresarial",
+        category: "Corporativo",
+        imageUrl: "/portfolio/evento-2.jpg",
+        description:
+          "Evento corporativo con pantallas LED, iluminación ambiental y sistema de sonido distribuido.",
+      },
+      {
+        id: "event3",
+        title: "Gala Benéfica",
+        category: "Especiales",
+        imageUrl: "/portfolio/evento-3.jpg",
+        description:
+          "Iluminación arquitectónica y escénica para gala en salón histórico.",
+      },
+      {
+        id: "event4",
+        title: "Concierto Sinfónico",
+        category: "Conciertos",
+        imageUrl: "/portfolio/evento-4.jpg",
+        description:
+          "Sistema de amplificación para orquesta en vivo con 80 micrófonos y monitorización.",
+      },
+      {
+        id: "event5",
+        title: "Lanzamiento de Producto",
+        category: "Corporativo",
+        imageUrl: "/portfolio/evento-5.jpg",
+        description:
+          "Mapping 3D sobre producto con efectos especiales y sonido envolvente.",
+      },
+      {
+        id: "event6",
+        title: "Festival de Cine",
+        category: "Especiales",
+        imageUrl: "/portfolio/evento-6.jpg",
+        description:
+          "Proyección en pantalla gigante con sistema de sonido Dolby Atmos.",
+      },
+      {
+        id: "event7",
+        title: "Boda Premium",
+        category: "Sociales",
+        imageUrl: "/portfolio/evento-7.jpg",
+        description:
+          "Iluminación ambiental, pista de baile LED y sistema de sonido discreto.",
+      },
+      {
+        id: "event8",
+        title: "Congreso Médico",
+        category: "Corporativo",
+        imageUrl: "/portfolio/evento-8.jpg",
+        description:
+          "Sistema de conferencias con traducción simultánea y streaming en vivo.",
+      },
+      {
+        id: "event9",
+        title: "Festival de Teatro",
+        category: "Culturales",
+        imageUrl: "/portfolio/evento-9.jpg",
+        description:
+          "Iluminación teatral, efectos especiales y sonido direccional para festival internacional de teatro.",
+      },
+      {
+        id: "event10",
+        title: "Espectáculo de Danza",
+        category: "Culturales",
+        imageUrl: "/portfolio/evento-10.jpg",
+        description:
+          "Diseño de iluminación coreografiada y sistema de sonido personalizado para espectáculo de ballet contemporáneo.",
+      },
+      {
+        id: "event11",
+        title: "Exposición de Arte Digital",
+        category: "Especiales",
+        imageUrl: "/portfolio/evento-11.jpg",
+        description:
+          "Instalación audiovisual inmersiva con proyecciones sincronizadas y sonido espacial para exposición de arte digital.",
+      },
+      {
+        id: "event12",
+        title: "Desfile de Moda",
+        category: "Especiales",
+        imageUrl: "/portfolio/evento-12.jpg",
+        description:
+          "Pasarela con iluminación de seguimiento, efectos visuales y sonido sincronizado para desfile de alta costura.",
+      },
+      {
+        id: "event13",
+        title: "Summit Tecnológico",
+        category: "Corporativo",
+        imageUrl: "/portfolio/evento-13.jpg",
+        description:
+          "Escenario principal con pantallas LED curvas, sonido multipunto y sistema de presentación interactiva.",
+      },
+      {
+        id: "event14",
+        title: "Concierto al Aire Libre",
+        category: "Conciertos",
+        imageUrl: "/portfolio/evento-14.jpg",
+        description:
+          "Montaje completo de escenario, iluminación y sonido para concierto en parque con 10.000 asistentes.",
+      },
+      {
+        id: "event15",
+        title: "Inauguración Gubernamental",
+        category: "Institucionales",
+        imageUrl: "/portfolio/evento-15.jpg",
+        description:
+          "Producción audiovisual completa para ceremonia de inauguración con autoridades y transmisión en directo.",
+      },
+    ];
+
+    // Obtener referencias a elementos del DOM
+    const portfolioItems = document.querySelectorAll(".portfolio-item");
+    const modal = document.getElementById("portfolioModal");
+    const modalImage = document.getElementById("modalImage");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalCategory = document.getElementById("modalCategory");
+    const modalDescription = document.getElementById("modalDescription");
+    const closeModal = document.querySelector(".close-modal");
+
+    // Función para abrir el modal con los datos del evento
+    function openModal(eventId) {
+      // Encontrar el evento por su ID
+      const event = portfolioEvents.find((ev) => ev.id === eventId);
+
+      if (event) {
+        // Establecer los datos en el modal
+        modalImage.src = event.imageUrl;
+        modalImage.alt = event.title;
+        modalTitle.textContent = event.title;
+        modalCategory.textContent = event.category;
+        modalDescription.textContent = event.description;
+
+        // Mostrar el modal con animación
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden"; // Prevenir scroll del body
+      }
+    }
+
+    // Función para cerrar el modal
+    function closeModalFunc() {
+      modal.classList.remove("active");
+
+      // Esperar a que termine la animación antes de ocultar completamente
+      setTimeout(() => {
+        document.body.style.overflow = ""; // Restaurar scroll
+      }, 300);
+    }
+
+    // Añadir event listeners a los items del portfolio
+    portfolioItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        const eventId = item.getAttribute("data-id");
+        openModal(eventId);
+      });
+    });
+
+    // Event listener para cerrar modal
+    closeModal.addEventListener("click", closeModalFunc);
+
+    // Cerrar modal al hacer clic fuera del contenido
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        closeModalFunc();
+      }
+    });
+
+    // Cerrar modal con tecla ESC
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("active")) {
+        closeModalFunc();
+      }
+    });
+  });
+</script>

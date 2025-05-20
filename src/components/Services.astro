@@ -1,0 +1,642 @@
+---
+const services = [
+  {
+    icon: "🔊",
+    title: "Sonido Profesional",
+    description:
+      "Sistemas de sonido de alta calidad para eventos de cualquier tamaño. Incluye altavoces, mezcladores, micrófonos inalámbricos y técnicos especializados.",
+    details: [
+      "Sistemas de sonido line array de última generación para grandes audiencias",
+      "Equipos de monitoreo para escenarios con tecnología InEar y floor monitors",
+      "Consolas digitales profesionales (Midas, Yamaha, Allen & Heath, Behringer)",
+      "Sistemas de microfonía inalámbrica Shure y Sennheiser con redundancia",
+      "Procesadores de audio y efectos de gama alta",
+    ],
+    subServices: [
+      {
+        name: "Sonido para Conciertos",
+        specs: "Sistemas de 10.000W hasta 100.000W según capacidad del venue",
+      },
+      {
+        name: "Sonido para Eventos Corporativos",
+        specs:
+          "Sistemas discretos con integración a videoconferencia y streaming",
+      },
+      {
+        name: "Sonido para DJ Sets",
+        specs:
+          "Monitores de alta potencia y subwoofers con respuesta hasta 30Hz",
+      },
+    ],
+  },
+  {
+    icon: "💡",
+    title: "Iluminación",
+    description:
+      "Iluminación arquitectónica, decorativa y escénica. Desde ambientación hasta espectáculos de luces sincronizados con música.",
+    details: [
+      "Iluminación LED profesional con mezcla de colores RGBW o RGBWA+UV",
+      "Luces móviles tipo beam, wash y spot de marcas premium",
+      "Controladores de iluminación DMX programables",
+      "Sistemas de truss y estructuras para montaje seguro",
+      "Software de programación avanzado para shows sincronizados",
+    ],
+    subServices: [
+      {
+        name: "Iluminación Escénica",
+        specs:
+          "Sistemas completos para escenarios con luces frontales, cenital y contraluces",
+      },
+      {
+        name: "Iluminación Arquitectónica",
+        specs:
+          "Bañadores de pared, uplights y proyectores para destacar espacios",
+      },
+      {
+        name: "Iluminación Decorativa",
+        specs:
+          "Guirnaldas, tubos LED pixel, elementos personalizados y efectos especiales",
+      },
+    ],
+  },
+  {
+    icon: "🎬",
+    title: "Video y Proyección",
+    description:
+      "Pantallas LED, proyectores, mapping y producción audiovisual completa para presentaciones, conciertos y eventos corporativos.",
+    details: [
+      "Pantallas LED de alta resolución (hasta 2.6mm de pixel pitch) para interiores y exteriores",
+      "Proyectores de 5.000 a 30.000 lúmenes para mapping y proyección a gran escala",
+      "Sistemas de procesamiento de video con múltiples entradas y resoluciones",
+      "Realización multicámara con switchers profesionales",
+      "Software especializado para mapping 3D y efectos visuales",
+    ],
+    subServices: [
+      {
+        name: "Pantallas LED",
+        specs: "Módulos de alta resolución con procesadores de video dedicados",
+      },
+      {
+        name: "Proyección y Mapping",
+        specs: "Proyectores láser de alta potencia con ópticas intercambiables",
+      },
+      {
+        name: "Producción Audiovisual",
+        specs:
+          "Edición en vivo, títulos, transiciones y efectos visuales personalizados",
+      },
+    ],
+  },
+  {
+    icon: "🎭",
+    title: "Escenarios y Estructuras",
+    description:
+      "Montaje de escenarios, gradas, carpas y estructuras temporales con las máximas garantías de seguridad.",
+    details: [
+      "Escenarios modulares certificados para diferentes capacidades de carga",
+      "Estructuras de truss para rigging de equipamiento técnico",
+      "Tarimas, pasarelas y rampas de acceso con barandillas de seguridad",
+      "Gradas y tribunas para audiencia con certificación de seguridad",
+      "Cubiertas, techos y protección para equipos en exteriores",
+    ],
+    subServices: [
+      {
+        name: "Escenarios para Conciertos",
+        specs:
+          "Estructuras hasta 20m de ancho con capacidad para soportar equipamiento pesado",
+      },
+      {
+        name: "Estructuras para Ferias",
+        specs:
+          "Sistemas modulares adaptables a diferentes configuraciones y necesidades",
+      },
+      {
+        name: "Gradas y Zonas VIP",
+        specs: "Plataformas elevadas con acceso seguro y acabados premium",
+      },
+    ],
+  },
+  {
+    icon: "🎙️",
+    title: "Conferencias y Congresos",
+    description:
+      "Equipamiento específico para conferencias, traducción simultánea, streaming y grabación profesional.",
+    details: [
+      "Sistemas de conferencia con micrófonos de sobremesa para cada participante",
+      "Equipos de traducción simultánea multicanal con receptores inalámbricos",
+      "Sistemas de votación electrónica y participación interactiva",
+      "Plataformas de streaming con múltiples cámaras y soporte para redes sociales",
+      "Grabación profesional multipista de audio y video para documentación",
+    ],
+    subServices: [
+      {
+        name: "Traducción Simultánea",
+        specs:
+          "Cabinas insonorizadas y sistema de distribución para hasta 8 idiomas",
+      },
+      {
+        name: "Sistemas de Conferencia",
+        specs:
+          "Micrófonos de conferencia con funciones de presidente, delegado y control de palabra",
+      },
+      {
+        name: "Streaming Profesional",
+        specs:
+          "Transmisión en vivo a múltiples plataformas con redundancia y respaldo",
+      },
+    ],
+  },
+  {
+    icon: "🎮",
+    title: "Efectos Especiales",
+    description:
+      "Máquinas de humo, confeti, pirotecnia fría, CO2 y otros efectos que harán de tu evento algo inolvidable.",
+    details: [
+      "Máquinas de humo bajo, medio y alto con control DMX",
+      "Sistemas de CO2 con jets y cryocanones para efectos explosivos",
+      "Lanzadores de confeti, serpentinas y papel para momentos culminantes",
+      "Pirotecnia fría y fuentes frías con certificación para uso interior",
+      "Burbujas, nieve artificial y efectos personalizados",
+    ],
+    subServices: [
+      {
+        name: "Efectos Atmosféricos",
+        specs:
+          "Humo, niebla, bruma y sistemas de haze para efectos de iluminación",
+      },
+      {
+        name: "Efectos de Impacto",
+        specs:
+          "CO2, confeti, chispas frías y lanzallamas para momentos culminantes",
+      },
+      {
+        name: "Efectos Personalizados",
+        specs: "Desarrollo a medida según las necesidades creativas del evento",
+      },
+    ],
+  },
+];
+---
+
+<section id="servicios" class="services">
+  <div class="container">
+    <div class="section-title">
+      <h2>Nuestros Servicios</h2>
+      <p>Ofrecemos soluciones técnicas completas para todo tipo de eventos</p>
+    </div>
+
+    <div class="services-grid">
+      {
+        services.map((service) => (
+          <div class="service-card">
+            <div class="service-icon">{service.icon}</div>
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+
+            <div class="service-details">
+              <h4>Características principales</h4>
+              <ul>
+                {service.details.map((detail) => (
+                  <li>{detail}</li>
+                ))}
+              </ul>
+
+              <h4>Servicios específicos</h4>
+              <div class="sub-services">
+                {service.subServices.map((subService) => (
+                  <div class="sub-service">
+                    <h5>{subService.name}</h5>
+                    <p class="specs">{subService.specs}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div class="service-footer">
+              <a href="#contacto" class="service-link">
+                Solicitar información
+              </a>
+              <button class="btn-toggle" aria-label="Mostrar más detalles">
+                <span class="icon-plus">+</span>
+                <span class="icon-minus">−</span>
+              </button>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="service-cta">
+      <h3>¿Necesitas un servicio personalizado?</h3>
+      <p>
+        Podemos crear un paquete técnico adaptado específicamente a las
+        necesidades de tu evento.
+      </p>
+      <a href="#contacto" class="btn btn-primary">Consulta sin compromiso</a>
+    </div>
+
+    <div class="service-methodology">
+      <div class="methodology-intro">
+        <h3>Nuestra Metodología de Trabajo</h3>
+        <p>
+          En BLS Servicios Audiovisuales nos comprometemos a ofrecer un servicio
+          completo y profesional siguiendo un proceso que garantiza resultados
+          óptimos.
+        </p>
+      </div>
+
+      <div class="methodology-steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Consulta y Relevamiento</h4>
+            <p>
+              Analizamos tus necesidades específicas y el tipo de evento para
+              ofrecer las mejores soluciones.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Planificación Técnica</h4>
+            <p>
+              Desarrollamos un proyecto técnico detallado con planos, rider y
+              cronograma de montaje.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Implementación</h4>
+            <p>
+              Nuestro equipo de profesionales realiza el montaje y las pruebas
+              necesarias para garantizar el funcionamiento óptimo.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Operación y Soporte</h4>
+            <p>
+              Durante el evento, nuestros técnicos garantizan que todo funcione
+              perfectamente, solucionando cualquier imprevisto.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">5</div>
+          <div class="step-content">
+            <h4>Desmontaje y Evaluación</h4>
+            <p>
+              Realizamos un desmontaje profesional y evaluamos los resultados
+              para mejorar constantemente.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    background-color: white;
+    padding: 5rem 0;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+  }
+
+  .service-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem;
+    transition:
+      transform 0.3s,
+      box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  .service-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.2rem;
+    background-color: var(--color-light);
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .service-card h3 {
+    color: var(--color-primary);
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .service-card > p {
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .service-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    margin-bottom: 1rem;
+  }
+
+  .service-card.active .service-details {
+    max-height: 1500px; /* Altura suficiente para mostrar todo el contenido */
+  }
+
+  .service-details h4 {
+    color: var(--color-secondary);
+    margin: 1.5rem 0 1rem;
+    font-size: 1.2rem;
+  }
+
+  .service-details ul {
+    padding-left: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-details ul li {
+    margin-bottom: 0.8rem;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .sub-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .sub-service {
+    background-color: var(--color-light);
+    border-radius: 8px;
+    padding: 1.2rem;
+    border-left: 3px solid var(--color-primary);
+  }
+
+  .sub-service h5 {
+    color: var(--color-primary);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .sub-service .specs {
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.4;
+    color: var(--color-text);
+  }
+
+  .service-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    border-top: 1px solid #eee;
+    padding-top: 1.5rem;
+  }
+
+  .service-link {
+    display: inline-block;
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+    position: relative;
+  }
+
+  .service-link::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--color-primary);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s;
+  }
+
+  .service-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  .btn-toggle {
+    background-color: var(--color-light);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: background-color 0.3s;
+  }
+
+  .btn-toggle:hover {
+    background-color: #e0e0e0;
+  }
+
+  .icon-plus,
+  .icon-minus {
+    position: absolute;
+    transition: opacity 0.3s;
+  }
+
+  .icon-minus {
+    opacity: 0;
+  }
+
+  .service-card.active .icon-plus {
+    opacity: 0;
+  }
+
+  .service-card.active .icon-minus {
+    opacity: 1;
+  }
+
+  .service-cta {
+    background-color: var(--color-light);
+    padding: 3.5rem;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 4rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+  }
+
+  .service-cta h3 {
+    color: var(--color-primary);
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .service-cta p {
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  /* Sección de metodología */
+  .service-methodology {
+    margin-top: 5rem;
+    padding: 2rem 0;
+  }
+
+  .methodology-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+  }
+
+  .methodology-intro h3 {
+    color: var(--color-primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .methodology-intro p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .methodology-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .step {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+  }
+
+  .step:hover {
+    transform: translateX(8px);
+  }
+
+  .step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: var(--color-primary);
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .step-content {
+    flex-grow: 1;
+  }
+
+  .step-content h4 {
+    color: var(--color-primary);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .step-content p {
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 992px) {
+    .services-grid {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .service-cta {
+      padding: 2rem;
+    }
+
+    .service-cta h3 {
+      font-size: 1.6rem;
+    }
+
+    .step {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+
+    .step:hover {
+      transform: translateY(-5px);
+    }
+
+    .methodology-intro h3 {
+      font-size: 1.6rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .sub-services {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Botones para mostrar/ocultar detalles
+    const toggleButtons = document.querySelectorAll(".btn-toggle");
+
+    toggleButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const serviceCard = button.closest(".service-card");
+        serviceCard.classList.toggle("active");
+      });
+    });
+  });
+</script>

@@ -1,0 +1,529 @@
+---
+// Datos para el formulario de contacto
+import { facebookIcon, instagramIcon, whatsappIcon } from "../utils/icons.js";
+
+const tiposEvento = [
+  { value: "concert", label: "Concierto" },
+  { value: "corporate", label: "Evento Corporativo" },
+  { value: "festival", label: "Festival" },
+  { value: "conference", label: "Conferencia" },
+  { value: "wedding", label: "Boda" },
+  { value: "other", label: "Otro" },
+];
+---
+
+<section id="contacto" class="contact">
+  <div class="container">
+    <div class="section-title">
+      <h2>Contacto</h2>
+      <p>
+        ¿Estás organizando un evento? ¡Contáctanos para hacer realidad tu
+        visión!
+      </p>
+    </div>
+
+    <div class="contact-container">
+      <div class="contact-info">
+        <div class="info-item">
+          <h3>Información de Contacto</h3>
+          <p><strong>Email:</strong> info@blsnet.com.ar</p>
+          <p><strong>Teléfono:</strong> +54 11 5183-4646</p>
+          <p>
+            <strong>Dirección:</strong> Catamarca 809, CABA, Buenos Aires, Argentina
+          </p>
+          <p><strong>Horario:</strong> Lunes a Viernes: 9:00 - 17:00</p>
+        </div>
+
+        <div class="info-item map-container">
+          <h3>Ubicación</h3>
+          <div class="map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.821271455183!2d-58.41448758477131!3d-34.60893678045779!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca8c854bd13f%3A0xfc0cf5c054f9e897!2sCatamarca%20809%2C%20C1231ABK%20CABA!5e0!3m2!1ses!2sar!4v1716576173567!5m2!1ses!2sar"
+              width="100%"
+              height="200"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+            >
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-container">
+        <h3>Envíanos un mensaje</h3>
+        <form class="contact-form" id="contactForm" method="POST">
+          <!-- No necesitamos campos ocultos para Formspree -->
+
+          <div class="form-group">
+            <label for="name">Nombre</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              minlength="2"
+              maxlength="100"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Teléfono</label>
+            <input type="tel" id="phone" name="phone" placeholder="Opcional" />
+          </div>
+
+          <div class="form-group">
+            <label for="event-type">Tipo de Evento</label>
+            <select id="event-type" name="event_type" required>
+              <option value="" disabled selected
+                >Selecciona un tipo de evento</option
+              >
+              {
+                tiposEvento.map((tipo) => (
+                  <option value={tipo.value}>{tipo.label}</option>
+                ))
+              }
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="message">Mensaje</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              required
+              minlength="10"
+              maxlength="1000"
+              placeholder="Cuéntanos sobre tu evento..."></textarea>
+          </div>
+
+          <div class="form-group full-width">
+            <button type="submit" class="btn btn-primary full-width">
+              Enviar Mensaje
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    background-color: white;
+    padding: 5rem 0;
+    overflow-x: hidden;
+  }
+
+  .contact-container {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+    max-width: 100%;
+  }
+
+  .contact-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .info-item {
+    background-color: var(--color-light);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  .info-item h3 {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .info-item p {
+    margin-bottom: 1rem;
+  }
+
+  .contact-social {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .contact-social a {
+    color: var(--color-text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    gap: 0.5rem;
+  }
+
+  .contact-social a:hover {
+    color: var(--color-primary);
+    transform: translateX(5px);
+  }
+
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+  }
+
+  .social-text {
+    display: inline-block;
+    position: relative;
+  }
+
+  .social-text::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--color-primary);
+    transition: width 0.3s ease;
+  }
+
+  .contact-social a:hover .social-text::after {
+    width: 100%;
+  }
+
+  .contact-form-container {
+    flex: 2;
+    background-color: var(--color-light);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  .contact-form-container h3 {
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+  }
+
+  .contact-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .full-width {
+    grid-column: span 2;
+  }
+
+  label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  input,
+  select,
+  textarea {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  button.full-width {
+    width: 100%;
+  }
+
+  /* Map styling */
+  .map-container {
+    overflow: hidden;
+  }
+
+  .map {
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .map iframe {
+    display: block;
+  }
+
+  @media (max-width: 992px) {
+    .contact-container {
+      flex-direction: column;
+    }
+
+    .contact-info {
+      order: 2;
+    }
+
+    .contact-form-container {
+      order: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contact-form {
+      grid-template-columns: 1fr;
+    }
+
+    .full-width {
+      grid-column: span 1;
+    }
+
+    .contact-container {
+      padding: 0 10px;
+    }
+
+    .contact-form-container {
+      width: 100%;
+      max-width: 100%;
+      padding: 1.5rem;
+    }
+
+    input,
+    select,
+    textarea {
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  /* Ajustes adicionales para pantallas muy pequeñas */
+  @media (max-width: 480px) {
+    .contact {
+      padding: 3rem 0;
+    }
+
+    .info-item,
+    .contact-form-container {
+      padding: 1.2rem;
+    }
+
+    .form-group {
+      margin-bottom: 0.8rem;
+    }
+  }
+
+  /* Estilos para mensajes de estado del formulario */
+  .form-message {
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 5px;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .form-message.success {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #2e7d32;
+    border: 1px solid #2e7d32;
+  }
+
+  .form-message.error {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: #d32f2f;
+    border: 1px solid #d32f2f;
+  }
+
+  .form-message.fade-out {
+    animation: fadeOut 0.5s ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Manejo del formulario de contacto
+    const contactForm = document.querySelector(".contact-form");
+
+    if (contactForm instanceof HTMLFormElement) {
+      const submitButton = contactForm.querySelector('button[type="submit"]');
+
+      if (submitButton instanceof HTMLButtonElement) {
+        const initialButtonText = submitButton.innerHTML;
+
+        contactForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          // Validar formulario manualmente antes de enviar
+          const formIsValid = contactForm.checkValidity();
+
+          if (!formIsValid) {
+            // Si hay campos inválidos, mostrar mensaje de error
+            showMessage(
+              "Por favor, completa correctamente todos los campos requeridos.",
+              "error"
+            );
+            // Activar validación nativa del navegador
+            contactForm.reportValidity();
+            return;
+          }
+
+          // Cambiar el texto del botón durante el envío
+          submitButton.innerHTML = "Enviando...";
+          submitButton.disabled = true;
+
+          try {
+            // Recopilar los datos del formulario
+            const formData = new FormData(contactForm);
+            const formDataObj = Object.fromEntries(formData.entries());
+
+            // Enviar el formulario utilizando fetch con JSON
+            const response = await fetch("/process-form.php", {
+              method: "POST",
+              body: JSON.stringify(formDataObj),
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+              },
+            });
+
+            if (response.ok) {
+              // Éxito en el envío
+              contactForm.reset();
+              showMessage(
+                "¡Gracias por tu mensaje! Te contactaremos pronto.",
+                "success"
+              );
+            } else {
+              // Error en el envío
+              console.error(
+                "Error de Formspree:",
+                response.status,
+                response.statusText
+              );
+
+              // Información detallada según el código de error
+              let errorMessage = "Hubo un problema al enviar el formulario.";
+
+              if (response.status === 422) {
+                errorMessage =
+                  "Error de validación: verifique que todos los campos estén correctamente completados.";
+              } else if (response.status === 429) {
+                errorMessage =
+                  "Has enviado demasiados formularios en poco tiempo. Por favor, espera unos minutos e inténtalo de nuevo.";
+              }
+
+              // Intentar obtener detalles adicionales del error
+              try {
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.includes("application/json")) {
+                  const errorData = await response.json();
+                  if (errorData && errorData.error) {
+                    errorMessage = errorData.error;
+                  }
+                }
+              } catch (e) {
+                // Si no podemos parsear la respuesta, usamos el mensaje ya definido
+                console.error("Error al parsear respuesta:", e);
+              }
+
+              // Añadir mensaje de ayuda
+              if (response.status === 422) {
+                errorMessage +=
+                  " Si el problema persiste, intenta contactarnos directamente al correo info@blsnet.com.ar o por teléfono al +54 11 5183-4646.";
+              }
+
+              throw new Error(errorMessage);
+            }
+          } catch (error) {
+            // Manejar errores
+            console.error("Error en el envío:", error);
+            let errorMsg = "Hubo un problema al enviar el formulario.";
+
+            if (error instanceof Error) {
+              errorMsg = error.message;
+            }
+
+            // Si es un error 422, dar información más específica
+            if (
+              error &&
+              typeof error === "object" &&
+              "status" in error &&
+              error.status === 422
+            ) {
+              errorMsg =
+                "Error de validación: verifique que todos los campos sean correctos.";
+            }
+
+            showMessage(
+              `Error: ${errorMsg}. Por favor, intenta nuevamente o contáctanos directamente.`,
+              "error"
+            );
+          } finally {
+            // Restaurar el botón
+            submitButton.innerHTML = initialButtonText;
+            submitButton.disabled = false;
+          }
+        });
+      }
+
+      // Función para mostrar mensajes al usuario
+      function showMessage(text: string, type: "success" | "error"): void {
+        // Verificar si ya existe un mensaje y removerlo
+        const existingMessage = document.querySelector(".form-message");
+        if (existingMessage) {
+          existingMessage.remove();
+        }
+
+        // Crear el elemento de mensaje
+        const messageElement = document.createElement("div");
+        messageElement.className = `form-message ${type}`;
+        messageElement.textContent = text;
+
+        // Insertar el mensaje después del formulario
+        if (contactForm) {
+          contactForm.insertAdjacentElement("afterend", messageElement);
+        }
+
+        // Auto-ocultar el mensaje después de un tiempo si es de éxito
+        if (type === "success") {
+          setTimeout(() => {
+            messageElement.classList.add("fade-out");
+            setTimeout(() => messageElement.remove(), 500);
+          }, 5000);
+        }
+      }
+    }
+  });
+</script>

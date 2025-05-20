@@ -1,0 +1,413 @@
+---
+const timelineEvents = [
+  {
+    year: "2000",
+    title: "Fundación",
+    description:
+      "BLS Servicios Audiovisuales nace con la visión de revolucionar la tecnología para eventos en el país.",
+  },
+  {
+    year: "2010",
+    title: "Expansión",
+    description:
+      "Ampliamos nuestro inventario con equipos de última generación y duplicamos nuestro personal técnico.",
+  },
+  {
+    year: "2018",
+    title: "Premio a la innovación",
+    description:
+      "Recibimos reconocimiento en la industria por nuestras trayectoria en soluciones innovadoras para eventos.",
+  },
+  {
+    year: "2020",
+    title: "Eventos virtuales",
+    description:
+      "Lanzamos nuestra división de eventos virtuales y transmisiones en vivo de alta calidad.",
+  },
+  {
+    year: "2023",
+    title: "Pantallas de Led de alta definición",
+    description:
+      "Ampliamos nuestro inventario con equipos con pantallas led de última generación.",
+  },
+  {
+    year: "2024",
+    title: "Internacional",
+    description:
+      "Comenzamos a brindar servicios en países vecinos, expandiendo nuestra huella en Latinoamérica.",
+  },
+];
+
+const values = [
+  {
+    icon: "⚙️",
+    title: "Excelencia técnica",
+    description:
+      "Todas nuestras áreas mancomunadas hacia la calidad operativa y técnica.",
+  },
+  {
+    icon: "🤝",
+    title: "Compromiso",
+    description:
+      "Creemos en la cooperación interpersonal en todas nuestras áreas. ",
+  },
+  {
+    icon: "💡",
+    title: "Innovación",
+    description:
+      "Nos desarrollamos y nos adaptamos a los cambios permanentemente.",
+  },
+  {
+    icon: "🔄",
+    title: "Adaptabilidad",
+    description:
+      "Nos adaptamos rápidamente a los cambios y requerimientos especiales.",
+  },
+];
+---
+
+<section id="sobre-nosotros" class="about">
+  <div class="container">
+    <div class="section-title">
+      <h2>Sobre Nosotros</h2>
+      <p>
+        Conoce más acerca de nuestra experiencia y compromiso con la excelencia
+        en eventos técnicos
+      </p>
+    </div>
+
+    <div class="about-content">
+      <div class="about-image">
+        <img
+          src="/about-image.jpg"
+          alt="Equipo de BLS Servicios Audiovisuales en acción"
+        />
+      </div>
+      <div class="about-text">
+        <h3>Quiénes Somos</h3>
+        <p>
+          BLS Servicios Audiovisuales es una empresa dedicada a prestar
+          servicios audiovisuales en eventos corporativos y también sociales,
+          que cuenta con una amplia gama de tecnología para ofrecer a los
+          clientes y satisfacer sus necesidades, ya sea un pequeño evento
+          interno o un congreso internacional, tenemos la capacidad técnica y
+          operativa de abarcar todos los posibles escenarios en cuanto a
+          realización de eventos.
+        </p>
+
+        <h3>Nuestra Misión</h3>
+        <p>
+          Ser el enlace entre lo que una empresa quiere comunicar y como quiere
+          comunicarlo; y el púbico al cual esta dirigido. Esa comunicación es
+          cada ves mas eficiente, gracias al continuo cambio al que BLS se
+          adapta, tanto del cliente como del contexto; respondiendo siempre con
+          la mas avanzada tecnología y el mas excelso servicio.
+        </p>
+
+        <h3>Nuestra Visión</h3>
+        <p>
+          Ser la empresa en la cual cada persona que la integra este dispuesto a
+          dar siempre lo mejor de si, para con BLS como para con el cliente
+          Satisfacer a los clientes desde el inicio del proceso, entendiendo sus
+          necesidades
+        </p>
+
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-number">250+</span>
+            <span class="stat-text">Eventos Anuales</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">20+</span>
+            <span class="stat-text">Profesionales</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">98%</span>
+            <span class="stat-text">Clientes Satisfechos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="values-section">
+      <div class="section-subtitle">
+        <h2>Nuestros Valores</h2>
+        <p>Los principios que guían nuestro trabajo día a día</p>
+      </div>
+
+      <div class="values-grid">
+        {
+          values.map((value) => (
+            <div class="value-card">
+              <div class="value-icon">{value.icon}</div>
+              <h3>{value.title}</h3>
+              <p>{value.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="timeline-section">
+      <div class="section-subtitle">
+        <h2>Nuestra Historia</h2>
+        <p>El camino que nos ha llevado hasta donde estamos hoy</p>
+      </div>
+
+      <div class="timeline">
+        {
+          timelineEvents.map((event, index) => (
+            <div class={`timeline-item ${index % 2 === 0 ? "left" : "right"}`}>
+              <div class="timeline-content">
+                <div class="timeline-year">{event.year}</div>
+                <h3>{event.title}</h3>
+                <p>{event.description}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background-color: var(--color-light);
+  }
+
+  .about-content {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+
+  .about-image {
+    flex: 1;
+  }
+
+  .about-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .about-text {
+    flex: 1;
+  }
+
+  .about-text h3 {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-text h3:first-child {
+    margin-top: 0;
+  }
+
+  .about-text p {
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+  .stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-number {
+    color: var(--color-primary);
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .stat-text {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .section-subtitle {
+    text-align: center;
+    margin: 5rem 0 3rem;
+  }
+
+  .section-subtitle h2 {
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-subtitle p {
+    color: var(--color-text);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Valores */
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .value-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.3s;
+  }
+
+  .value-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .value-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .value-card h3 {
+    color: var(--color-primary);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 4rem auto;
+  }
+
+  .timeline::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    background-color: var(--color-primary);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+    border-radius: 3px;
+  }
+
+  .timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+  }
+
+  .timeline-item.left {
+    left: 0;
+  }
+
+  .timeline-item.right {
+    left: 50%;
+  }
+
+  .timeline-content {
+    padding: 20px 30px;
+    background-color: white;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  .timeline-content::after {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border: 4px solid var(--color-primary);
+    top: 20px;
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  .timeline-item.left .timeline-content::after {
+    right: -17px;
+  }
+
+  .timeline-item.right .timeline-content::after {
+    left: -17px;
+  }
+
+  .timeline-year {
+    display: inline-block;
+    padding: 5px 15px;
+    background-color: var(--color-primary);
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .timeline-content h3 {
+    color: var(--color-primary);
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 992px) {
+    .about-content {
+      flex-direction: column;
+    }
+
+    .stats {
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .stat {
+      flex: 0 0 30%;
+    }
+
+    .timeline::after {
+      left: 31px;
+    }
+
+    .timeline-item {
+      width: 100%;
+      padding-left: 70px;
+      padding-right: 25px;
+    }
+
+    .timeline-item.right {
+      left: 0;
+    }
+
+    .timeline-content::after {
+      left: -17px !important;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .stat {
+      flex: 0 0 100%;
+      margin-bottom: 1.5rem;
+    }
+
+    .stats {
+      flex-direction: column;
+    }
+
+    .values-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

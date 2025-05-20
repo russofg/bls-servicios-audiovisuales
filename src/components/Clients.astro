@@ -1,0 +1,277 @@
+---
+// Lista de logos de clientes
+const clients = [
+  {
+    name: "MCI",
+    logo: "/clients/client1.png", // Reutilizamos logos existentes
+  },
+  {
+    name: "Rubra",
+    logo: "/clients/client2.png",
+  },
+  {
+    name: "Cicyp",
+    logo: "/clients/client3.png",
+  },
+  {
+    name: "Furlon Fox",
+    logo: "/clients/client4.png",
+  },
+  {
+    name: "Enfasis",
+    logo: "/clients/client5.png",
+  },
+  {
+    name: "Cámara Argentina de Comercio y Servicios",
+    logo: "/clients/client6.png",
+  },
+  {
+    name: "Jauja",
+    logo: "/clients/client7.png",
+  },
+  {
+    name: "Central de Eventos",
+    logo: "/clients/client8.png",
+  },
+  {
+    name: "Concierto Nacional",
+    logo: "/clients/client9.png",
+  },
+  {
+    name: "Empresa Innovación",
+    logo: "/clients/client10.png",
+  },
+  {
+    name: "Municipalidad de Buenos Aires",
+    logo: "/clients/client11.png",
+  },
+  {
+    name: "Festival Rock en Río",
+    logo: "/clients/client12.png",
+  },
+];
+
+// Cifras y estadísticas
+const stats = [
+  { value: "5000+", label: "Eventos Realizados" },
+  { value: "125+", label: "Clientes Recurrentes" },
+  { value: "98%", label: "Índice de Satisfacción" },
+  { value: "25", label: "Años de Experiencia" },
+];
+---
+
+<section id="clientes" class="clients">
+  <div class="container">
+    <div class="section-title">
+      <h2>Nuestros Clientes</h2>
+      <p>Empresas y organizaciones que han confiado en nuestros servicios</p>
+    </div>
+
+    <!-- Stats section -->
+    <div class="stats-container">
+      {
+        stats.map((stat) => (
+          <div class="stat-item">
+            <div class="stat-value">{stat.value}</div>
+            <div class="stat-label">{stat.label}</div>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Clients carousel -->
+    <div class="clients-carousel">
+      <div class="carousel-track">
+        {
+          // Duplicar los clientes para crear un loop continuo
+          [...clients, ...clients].map((client) => (
+            <div class="carousel-item">
+              <div class="client-logo">
+                <img src={client.logo} alt={`${client.name} Logo`} />
+              </div>
+              <div class="client-name">{client.name}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="clients-cta">
+      <h3>¿Quieres ser parte de nuestros clientes?</h3>
+      <p>
+        Contáctanos para que podamos ayudarte a hacer de tu próximo evento una
+        experiencia inolvidable.
+      </p>
+      <a href="#contacto" class="btn btn-primary">Hablemos de tu proyecto</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .clients {
+    background-color: var(--color-light);
+    padding: 5rem 0;
+  }
+
+  /* Stats section */
+  .stats-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 3rem 0;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 1rem 2rem;
+  }
+
+  .stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 1rem;
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  /* Clients carousel */
+  .clients-carousel {
+    width: 100%;
+    overflow: hidden;
+    background-color: white;
+    padding: 2rem 0;
+    border-radius: 12px;
+    margin: 3rem 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  .carousel-track {
+    display: flex;
+    animation: scroll 40s linear infinite;
+    width: calc(
+      200px * 24
+    ); /* Ancho de cada ítem * número total de ítems (12 clientes duplicados) */
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%); /* Desplazarse la mitad para hacer el loop */
+    }
+  }
+
+  .carousel-track:hover {
+    animation-play-state: paused;
+  }
+
+  .carousel-item {
+    min-width: 200px;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .client-logo {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .client-logo img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition:
+      filter 0.3s,
+      opacity 0.3s;
+  }
+
+  .client-logo:hover img {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+
+  .client-name {
+    font-size: 0.9rem;
+    text-align: center;
+    color: var(--color-text);
+    opacity: 0.8;
+  }
+
+  /* CTA Section */
+  .clients-cta {
+    background-color: white;
+    padding: 3rem;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 3rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  }
+
+  .clients-cta h3 {
+    color: var(--color-primary);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .clients-cta p {
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    font-size: 1.1rem;
+  }
+
+  /* Responsive styles */
+  @media (max-width: 992px) {
+    .carousel-item {
+      min-width: 180px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .stats-container {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .stat-item {
+      width: 100%;
+    }
+
+    .clients-cta {
+      padding: 2rem;
+    }
+
+    .clients-cta h3 {
+      font-size: 1.5rem;
+    }
+
+    .carousel-item {
+      min-width: 150px;
+      padding: 0 1rem;
+    }
+  }
+</style>
+
+<script>
+  // No se necesita JavaScript adicional para este carrusel
+  // ya que funciona automáticamente con CSS animation
+</script>

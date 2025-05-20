@@ -1,0 +1,850 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { articles, getSlugFromTitle } from "../../data/educationalResources.js";
+import { processArticleContent } from "../../utils/contentProcessor.js";
+import {
+  homeIcon,
+  arrowUpIcon,
+  downloadIcon,
+  shareIcon,
+  facebookIcon,
+  twitterIcon,
+  linkedinIcon,
+  whatsappIcon,
+} from "../../utils/icons.js";
+
+// Definir getStaticPaths para generar todas las rutas posibles
+export function getStaticPaths() {
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+// Obtener el artículo de los props
+const { article } = Astro.props;
+---
+
+<Layout
+  title={`${article.title} | BLS Servicios Audiovisuales Recursos Educativos`}
+>
+  <div class="article-page">
+    <!-- Botón de volver a inicio (fijo) -->
+    <div class="navigation-buttons">
+      <a href="/" class="nav-btn back-home-btn">
+        <span class="btn-icon" set:html={homeIcon} />
+        <span class="btn-text">Inicio</span>
+      </a>
+      <button id="back-to-top" class="nav-btn scroll-top-btn">
+        <span class="btn-icon" set:html={arrowUpIcon} />
+        <span class="btn-text">Subir</span>
+      </button>
+    </div>
+
+    <!-- Hero del artículo -->
+    <header class="article-hero">
+      <div class="container">
+        <div class="breadcrumbs">
+          <a href="/">Inicio</a> &gt;
+          <a href="/#recursos">Recursos Educativos</a> &gt;
+          <span>{article.title}</span>
+        </div>
+
+        <div class="article-header">
+          <div class="category-badge">
+            <span class="category-icon">{article.categoryIcon}</span>
+            <span class="category-name">{article.category}</span>
+          </div>
+          <h1>{article.title}</h1>
+
+          <div class="article-meta">
+            <div class="author-info">
+              <span class="author-avatar">👨‍💼</span>
+              <span class="by-label">Por</span>
+              <span class="author-name">{article.author}</span>
+              <span class="author-role">• {article.authorRole}</span>
+            </div>
+            <div class="article-details">
+              <span class="calendar-icon">📅</span>
+              <span class="publish-date">{article.publishDate}</span>
+              <span class="dot-separator">•</span>
+              <span class="clock-icon">⏱️</span>
+              <span class="read-time">{article.readTime} de lectura</span>
+            </div>
+          </div>
+
+          <div class="article-actions">
+            <a href={article.downloadPdf} class="download-btn" download>
+              <span class="download-icon" set:html={downloadIcon} />
+              <span class="download-text">Descargar PDF</span>
+            </a>
+            <button class="share-btn">
+              <span class="share-icon" set:html={shareIcon} />
+              <span class="share-text">Compartir</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <img src={article.heroImage} alt={article.title} />
+      </div>
+    </header>
+
+    <!-- Contenido del artículo -->
+    <div class="container">
+      <div class="article-layout">
+        <article class="article-content">
+          <div
+            class="content"
+            set:html={processArticleContent(article.content)}
+          />
+
+          <div class="article-footer">
+            <div class="share-section">
+              <h4>¿Te resultó útil este artículo? 👍</h4>
+              <p>Compártelo con tus colegas</p>
+              <div class="social-buttons">
+                <button class="social-btn facebook">
+                  <span class="sr-only">Compartir en Facebook</span>
+                  <span class="social-icon" set:html={facebookIcon} />
+                  <span>Facebook</span>
+                </button>
+                <button class="social-btn twitter">
+                  <span class="sr-only">Compartir en Twitter</span>
+                  <span class="social-icon" set:html={twitterIcon} />
+                  <span>Twitter</span>
+                </button>
+                <button class="social-btn linkedin">
+                  <span class="sr-only">Compartir en LinkedIn</span>
+                  <span class="social-icon" set:html={linkedinIcon} />
+                  <span>LinkedIn</span>
+                </button>
+                <button class="social-btn whatsapp">
+                  <span class="sr-only">Compartir en WhatsApp</span>
+                  <span class="social-icon" set:html={whatsappIcon} />
+                  <span>WhatsApp</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="pdf-download">
+              <h4>Descarga la versión completa 📝</h4>
+              <p>
+                Obtén este artículo en formato PDF con información adicional y
+                diagramas detallados
+              </p>
+              <a href={article.downloadPdf} class="download-pdf-btn" download>
+                <span class="download-icon" set:html={downloadIcon} />
+                <span class="download-text">Descargar PDF</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <aside class="article-sidebar">
+          <div class="toc-section">
+            <h4>📑 Contenido del artículo</h4>
+            <div class="toc" id="table-of-contents">
+              <!-- El índice se generará con JavaScript -->
+            </div>
+          </div>
+
+          <div class="related-articles">
+            <h4>🔗 Artículos relacionados</h4>
+            <ul>
+              {
+                article.relatedArticles.map((title) => (
+                  <li>
+                    <a href={`/recursos/${getSlugFromTitle(title)}`}>
+                      <span class="article-link-icon" set:html={downloadIcon} />
+                      <span>{title}</span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <div class="cta-box">
+            <h4>🤝 ¿Necesitas ayuda profesional?</h4>
+            <p>Contacta con nuestros especialistas para tu próximo evento</p>
+            <a href="#contacto" class="contact-btn">Solicitar consulta</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .article-page {
+    margin-top: 0;
+    background-color: #fff;
+  }
+
+  /* Botones de navegación fijos */
+  .navigation-buttons {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 100;
+  }
+
+  .nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: white;
+    color: var(--color-primary);
+    border: none;
+    text-decoration: none;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    transition:
+      transform 0.3s,
+      background-color 0.3s;
+    cursor: pointer;
+  }
+
+  .nav-btn:hover {
+    transform: translateY(-5px);
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 24px;
+    margin-bottom: 0.2rem;
+  }
+
+  .btn-text {
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .scroll-top-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    visibility: hidden;
+    transition:
+      opacity 0.3s,
+      transform 0.3s,
+      visibility 0.3s;
+  }
+
+  .scroll-top-btn.visible {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  /* Hero */
+  .article-hero {
+    position: relative;
+    background-color: var(--color-light);
+    padding-top: 2rem;
+  }
+
+  .breadcrumbs {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    color: var(--color-text);
+  }
+
+  .breadcrumbs a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .breadcrumbs a:hover {
+    text-decoration: underline;
+  }
+
+  .article-header {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem;
+    text-align: center;
+  }
+
+  .category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--color-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    margin-bottom: 1.5rem;
+  }
+
+  .article-header h1 {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+    color: var(--color-text);
+  }
+
+  .author-info {
+    font-size: 1rem;
+  }
+
+  .author-name {
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .author-role {
+    opacity: 0.8;
+  }
+
+  .article-details {
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+
+  .dot-separator {
+    margin: 0 0.3rem;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .article-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .download-btn,
+  .share-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .download-btn {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+  }
+
+  .download-btn:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  .share-btn {
+    background-color: #f0f0f0;
+    color: var(--color-text);
+    border: none;
+  }
+
+  .share-btn:hover {
+    background-color: #e0e0e0;
+  }
+
+  /* Contenido del artículo */
+  .article-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 3rem;
+    margin: 3rem 0 5rem;
+  }
+
+  .article-content {
+    line-height: 1.8;
+    color: var(--color-text);
+  }
+
+  .content h2 {
+    color: var(--color-primary);
+    font-size: 1.8rem;
+    margin: 2.5rem 0 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .content p {
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .content ul,
+  .content ol {
+    margin: 1.5rem 0 2rem;
+    padding: 1.5rem 1.5rem 1.5rem 3rem;
+    background-color: rgba(0, 0, 0, 0.02);
+    border-radius: 8px;
+  }
+
+  .content ul.enhanced-list,
+  .content ol.enhanced-list {
+    border-left: 3px solid var(--color-primary);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+
+  .content li {
+    margin-bottom: 0.9rem;
+    position: relative;
+  }
+
+  .content ul li::marker {
+    color: var(--color-primary);
+  }
+
+  .content ol li::marker {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .content strong {
+    color: var(--color-secondary);
+    font-weight: 600;
+  }
+
+  .content strong.highlighted {
+    background-color: rgba(0, 120, 120, 0.08);
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+  }
+
+  /* Footer del artículo */
+  .article-footer {
+    margin-top: 4rem;
+    border-top: 1px solid #eee;
+    padding-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .share-section,
+  .pdf-download {
+    background-color: var(--color-light);
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+
+  .share-section h4,
+  .pdf-download h4 {
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .share-section p,
+  .pdf-download p {
+    font-size: 0.95rem;
+    margin-bottom: 1.2rem;
+    opacity: 0.8;
+  }
+
+  .social-buttons {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .social-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: white;
+    font-weight: 500;
+  }
+
+  .download-icon,
+  .share-icon,
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+  }
+
+  .social-icon {
+    color: white;
+  }
+
+  .facebook {
+    background-color: #3b5998;
+  }
+
+  .twitter {
+    background-color: #1da1f2;
+  }
+
+  .linkedin {
+    background-color: #0077b5;
+  }
+
+  .whatsapp {
+    background-color: #25d366;
+  }
+
+  .download-pdf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+  }
+
+  .download-pdf-btn:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  /* Sidebar */
+  .article-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .toc-section,
+  .related-articles,
+  .cta-box {
+    background-color: var(--color-light);
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+
+  .toc-section h4,
+  .related-articles h4,
+  .cta-box h4 {
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .toc a {
+    display: block;
+    padding: 0.5rem 0;
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: color 0.3s;
+  }
+
+  .toc a:hover {
+    color: var(--color-primary);
+  }
+
+  .toc a.toc-h3 {
+    padding-left: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .related-articles ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .related-articles li {
+    margin-bottom: 0.8rem;
+  }
+
+  .related-articles a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+  }
+
+  .article-link-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    color: var(--color-primary);
+  }
+
+  .related-articles a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--color-primary);
+  }
+
+  .cta-box {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .cta-box h4 {
+    color: white;
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .cta-box p {
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    opacity: 0.9;
+  }
+
+  .contact-btn {
+    display: inline-block;
+    background-color: white;
+    color: var(--color-primary);
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s;
+  }
+
+  .contact-btn:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* Responsive */
+  @media (max-width: 992px) {
+    .article-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .article-sidebar {
+      order: -1;
+      margin-bottom: 2rem;
+    }
+
+    .article-header h1 {
+      font-size: 2rem;
+    }
+
+    .hero-image {
+      height: 300px;
+    }
+
+    .article-footer {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .article-header {
+      padding: 0 1rem 2rem;
+    }
+
+    .article-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .hero-image {
+      height: 250px;
+    }
+
+    .article-meta {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .content h2 {
+      font-size: 1.5rem;
+    }
+
+    .content p {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .breadcrumbs {
+      font-size: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .article-actions {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .download-btn,
+    .share-btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .article-header h1 {
+      font-size: 1.6rem;
+    }
+
+    .hero-image {
+      height: 200px;
+    }
+
+    /* Ajustes para los botones de navegación en móvil */
+    .navigation-buttons {
+      bottom: 1.5rem;
+      right: 1.5rem;
+    }
+
+    .nav-btn {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Generar la tabla de contenidos
+    const toc = document.getElementById("table-of-contents");
+    if (toc) {
+      const headings = document.querySelectorAll(".content h2");
+
+      headings.forEach((heading) => {
+        if (heading.textContent) {
+          // Eliminar el emoji del inicio para el ID y para mostrar en el TOC
+          const headingText = heading.textContent
+            .replace(/^[\p{Emoji}\s]+/u, "")
+            .trim();
+
+          const link = document.createElement("a");
+          link.textContent = headingText;
+          link.href = `#${headingText.toLowerCase().replace(/\s+/g, "-")}`;
+          link.className = "toc-h2";
+
+          // Añadir ID al encabezado para el enlace de anclaje
+          heading.id = headingText.toLowerCase().replace(/\s+/g, "-");
+
+          toc.appendChild(link);
+        }
+      });
+    }
+
+    // Control del botón "Volver arriba"
+    const scrollTopBtn = document.getElementById("back-to-top");
+    if (scrollTopBtn) {
+      // Mostrar el botón cuando el usuario ha hecho scroll a cierta distancia
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+          scrollTopBtn.classList.add("visible");
+        } else {
+          scrollTopBtn.classList.remove("visible");
+        }
+      });
+
+      // Funcionalidad para volver arriba al hacer clic
+      scrollTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+    }
+
+    // Botón de compartir
+    const shareButton = document.querySelector(".share-btn");
+    if (shareButton) {
+      shareButton.addEventListener("click", () => {
+        if (navigator.share) {
+          const titleEl = document.querySelector("h1");
+          const title = titleEl ? titleEl.textContent || "" : "";
+
+          navigator
+            .share({
+              title: title,
+              url: window.location.href,
+            })
+            .catch((err) => {
+              console.error("Error al compartir:", err);
+            });
+        } else {
+          alert(
+            "Lo sentimos, tu navegador no soporta la API de compartir. Puedes copiar la URL manualmente."
+          );
+        }
+      });
+    }
+
+    // Botones sociales
+    const socialButtons = document.querySelectorAll(".social-btn");
+    socialButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const url = encodeURIComponent(window.location.href);
+        const titleEl = document.querySelector("h1");
+        const title = titleEl
+          ? encodeURIComponent(titleEl.textContent || "")
+          : "";
+
+        let shareUrl = "";
+        if (button.classList.contains("facebook")) {
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+        } else if (button.classList.contains("twitter")) {
+          shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+        } else if (button.classList.contains("linkedin")) {
+          shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+        } else if (button.classList.contains("whatsapp")) {
+          shareUrl = `https://wa.me/?text=${title}%20${url}`;
+        }
+
+        if (shareUrl) {
+          window.open(shareUrl, "_blank");
+        }
+      });
+    });
+  });
+</script>

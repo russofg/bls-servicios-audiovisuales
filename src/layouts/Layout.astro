@@ -1,22 +1,560 @@
+---
+interface Props {
+  title?: string;
+}
+
+import {
+  facebookIcon,
+  twitterIcon,
+  linkedinIcon,
+  instagramIcon,
+  whatsappIcon,
+} from "../utils/icons.js";
+
+const {
+  title = "BLS Servicios Audiovisuales - Servicios técnicos para eventos",
+} = Astro.props;
+---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image" href="/logo-icon.png" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div>
+          <a class="logo" href="#">Bls Servicios Audiovisuales</a>
+        </div>
+        <!-- Botón de menú hamburguesa para móvil -->
+        <button
+          id="menuToggle"
+          class="mobile-menu-toggle"
+          aria-label="Abrir menú"
+        >
+          <span class="hamburger-icon">
+            <span class="line line-1"></span>
+            <span class="line line-2"></span>
+            <span class="line line-3"></span>
+          </span>
+        </button>
+        <!-- Menú de navegación -->
+        <div id="navWrapper" class="nav-wrapper">
+          <ul class="nav-menu">
+            <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#clientes">Clientes</a></li>
+            <li><a href="#recursos">Recursos</a></li>
+            <li><a href="#contacto" class="contact-nav-btn">Contacto</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo">BLS Servicios Audiovisuales</div>
+        <div class="footer-links">
+          <div class="footer-section">
+            <h3>Contacto</h3>
+            <p>info@blsnet.com.ar</p>
+            <p>+54 11 5183-4646</p>
+          </div>
+          <div class="footer-section">
+            <h3>Dirección</h3>
+            <p>Catamarca 809</p>
+            <p>Buenos Aires, Argentina</p>
+          </div>
+          <div class="footer-section">
+            <h3>Síguenos</h3>
+            <div class="social-links">
+              <a
+                href="https://www.facebook.com/blsnet.com.ar"
+                aria-label="Facebook"
+                target="_blank"
+              >
+                <span set:html={facebookIcon} />
+              </a>
+              <a
+                href="https://www.instagram.com/blsnet.com.ar"
+                aria-label="Instagram"
+                target="_blank"
+              >
+                <span set:html={instagramIcon} />
+              </a>
+              <a
+                href="https://wa.me/5491151834646"
+                aria-label="WhatsApp"
+                target="_blank"
+              >
+                <span set:html={whatsappIcon} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        © {new Date().getFullYear()} BLS Servicios Audiovisuales. Todos los derechos
+        reservados.
+      </div>
+    </footer>
+
+    <script>
+      // Script para controlar el menú móvil con animaciones mejoradas
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.getElementById("menuToggle");
+        const navWrapper = document.getElementById("navWrapper");
+
+        if (menuToggle && navWrapper) {
+          // Función para abrir/cerrar el menú con animación
+          const toggleMenu = () => {
+            menuToggle.classList.toggle("menu-open");
+            navWrapper.classList.toggle("active");
+            document.body.classList.toggle("menu-open-no-scroll");
+          };
+
+          // Event listener para el botón de menú
+          menuToggle.addEventListener("click", toggleMenu);
+
+          // Cerrar el menú al hacer clic en un enlace (para móviles)
+          const navLinks = document.querySelectorAll(".nav-menu a");
+          navLinks.forEach((link) => {
+            if (link) {
+              link.addEventListener("click", () => {
+                if (window.innerWidth <= 768) {
+                  toggleMenu();
+                }
+              });
+            }
+          });
+
+          // Cerrar el menú si se redimensiona la ventana a tamaño desktop
+          window.addEventListener("resize", () => {
+            if (
+              window.innerWidth > 768 &&
+              navWrapper.classList.contains("active")
+            ) {
+              menuToggle.classList.remove("menu-open");
+              navWrapper.classList.remove("active");
+              document.body.classList.remove("menu-open-no-scroll");
+            }
+          });
+        }
+      });
+    </script>
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  :root {
+    --color-primary: #b3bb09;
+    --color-secondary: #757473;
+    --color-accent: #e1e472;
+    --color-background: #ffffff;
+    --color-text: #333333;
+    --color-light: #f8f9fa;
+    --color-dark: #212529;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family: "Montserrat", sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  section {
+    padding: 5rem 0;
+  }
+
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  nav a:hover {
+    color: var(--color-primary);
+  }
+
+  .contact-nav-btn {
+    background-color: var(--color-primary);
+    color: white !important;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+  }
+
+  .contact-nav-btn:hover {
+    background-color: #2a0a73;
+    color: white !important;
+  }
+
+  main {
+    margin-top: 70px;
+  }
+
+  .section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-title h2 {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+  }
+
+  .section-title p {
+    color: var(--color-text);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: #2a0a73;
+  }
+
+  .btn-secondary {
+    background-color: var(--color-secondary);
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    background-color: #d81b74;
+  }
+
+  footer {
+    background-color: var(--color-dark);
+    color: white;
+    padding: 3rem 0 1rem;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .footer-logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+
+  .footer-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+
+  .social-links a:hover {
+    background-color: var(--color-primary);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .social-links a span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+  }
+
+  .copyright {
+    text-align: center;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Menú hamburguesa móvil */
+  .mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+    transition: transform 0.3s ease;
+  }
+
+  .mobile-menu-toggle:hover {
+    transform: scale(1.1);
+  }
+
+  .hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    position: relative;
+  }
+
+  .line {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-primary);
+    border-radius: 6px;
+    transition:
+      transform 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6),
+      opacity 0.3s ease,
+      background-color 0.3s ease;
+  }
+
+  /* Añadimos un estado hover */
+  .mobile-menu-toggle:hover .line {
+    background-color: var(--color-secondary);
+  }
+
+  /* Cuando el menú está abierto - animación más fluida */
+  .menu-open .line-1 {
+    transform: translateY(8.5px) rotate(45deg);
+    width: 100%;
+  }
+
+  .menu-open .line-2 {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  .menu-open .line-3 {
+    transform: translateY(-8.5px) rotate(-45deg);
+    width: 100%;
+  }
+
+  body.menu-open-no-scroll {
+    overflow: hidden;
+  }
+
+  /* Estilos para dispositivos móviles */
+  @media (max-width: 768px) {
+    .mobile-menu-toggle {
+      display: flex;
+    }
+
+    .logo {
+      font-size: 0.9rem;
+    }
+
+    .nav-wrapper {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background-color: rgba(255, 255, 255, 0.98);
+      padding-top: 80px;
+      transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+
+    .nav-wrapper.active {
+      right: 0;
+    }
+
+    .nav-menu {
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      gap: 2rem;
+    }
+
+    .nav-menu li {
+      width: 100%;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition:
+        opacity 0.4s ease,
+        transform 0.4s ease;
+      transition-delay: 0.1s;
+    }
+
+    .nav-wrapper.active .nav-menu li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Aplica retrasos diferentes a cada elemento del menú */
+    .nav-wrapper.active .nav-menu li:nth-child(1) {
+      transition-delay: 0.1s;
+    }
+    .nav-wrapper.active .nav-menu li:nth-child(2) {
+      transition-delay: 0.2s;
+    }
+    .nav-wrapper.active .nav-menu li:nth-child(3) {
+      transition-delay: 0.3s;
+    }
+    .nav-wrapper.active .nav-menu li:nth-child(4) {
+      transition-delay: 0.4s;
+    }
+    .nav-wrapper.active .nav-menu li:nth-child(5) {
+      transition-delay: 0.5s;
+    }
+
+    .nav-menu a {
+      display: block;
+      font-size: 1.2rem;
+      padding: 1rem;
+      width: 100%;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    /* Efecto hover para enlaces del menú */
+    .nav-menu a:not(.contact-nav-btn)::after {
+      content: "";
+      position: absolute;
+      bottom: 0.8rem;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background-color: var(--color-primary);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-menu a:not(.contact-nav-btn):hover::after {
+      width: 60%;
+    }
+
+    .contact-nav-btn {
+      display: inline-block;
+      width: auto;
+      margin-top: 1rem;
+      transform: scale(1);
+      transition:
+        transform 0.3s ease,
+        background-color 0.3s ease;
+    }
+
+    .contact-nav-btn:hover {
+      transform: scale(1.05);
+    }
+  }
 </style>
