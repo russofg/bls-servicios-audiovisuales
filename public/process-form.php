@@ -97,8 +97,13 @@ $email_body = "
 // Configurar encabezados para correo HTML
 $headers = "MIME-Version: 1.0" . "\r\n";
 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-$headers .= "From: {$name} <{$email}>" . "\r\n";
-$headers .= "Reply-To: {$email}" . "\r\n";
+$from_email = "contacto@serviciosbls.com";
+$from_name = "Consulta de - BLS Servicios Audiovisuales";
+$headers .= "From: {$from_name} <{$from_email}>" . "\r\n";
+$headers .= "Reply-To: {$name} <{$email}>" . "\r\n";
+$headers .= "X-Priority: 3\r\n";
+$headers .= "X-MSMail-Priority: Normal\r\n";
+$headers .= "Importance: Normal\r\n";
 
 // Añadir destinatarios en copia oculta (BCC)
 if (!empty($bcc_emails) && is_array($bcc_emails)) {
