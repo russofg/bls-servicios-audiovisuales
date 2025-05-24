@@ -2,9 +2,10 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../config/email-config.php';
-require_once __DIR__ . '/../config/email-template.php';
+require __DIR__ . '/vendor/autoload.php';
+$basePath = dirname(__DIR__, 1);
+require_once $basePath . '/config/email-config.php';
+require_once $basePath . '/config/email-template.php';
 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
@@ -70,19 +71,28 @@ try {
     $mail->Port       = SMTP_PORT;
 
     $mail->setFrom(SMTP_USER, 'Formulario BLS');
-    $mail->addAddress('russofg@gmail.com');
-    $mail->addBCC('bogadojonathan012@gmail.com');
+    $mail->addAddress('info@blsnet.com.ar');
+    $mail->addBCC('russofg@gmail.com','bogadojonathan012@hotmail.com');
 
     $mail->isHTML(true);
+    $mail->CharSet = 'UTF-8';
     $mail->Subject = 'Nuevo mensaje de contacto desde BLS Servicios Audiovisuales';
     $mail->Body    = $email_body;
 
     $mail->send();
     echo json_encode(['success' => true, 'message' => '¡Gracias por tu mensaje! Te contactaremos pronto.']);
 } catch (Exception $e) {
+    // Registrar error en archivo .log
+    $logFile = __DIR__ . '/../logs/form-errors.log';
+    $logMessage = "[" . date('Y-m-d H:i:s') . "] ";
+    $logMessage .= "Error PHPMailer: {$mail->ErrorInfo} | Excepción: {$e->getMessage()}\n";
+    if (!file_exists(dirname($logFile))) {
+        mkdir(dirname($logFile), 0775, true);
+    }
+    file_put_contents($logFile, $logMessage, FILE_APPEND);
     http_response_code(500);
     echo json_encode([
         'success' => false,
-        'message' => "Error al enviar el correo: {$mail->ErrorInfo}"
+        'message' => 'Hubo un problema al enviar el formulario. Por favor, intenta nuevamente o contáctanos directamente.'
     ]);
 }
