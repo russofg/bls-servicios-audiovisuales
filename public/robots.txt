@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Disallow admin or sensitive areas if needed
+# Disallow: /admin/
+
+Sitemap: https://pruebasbls.serviciosbls.com/sitemap.xml

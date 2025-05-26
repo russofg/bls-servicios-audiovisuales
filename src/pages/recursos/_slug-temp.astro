@@ -12,7 +12,15 @@ export function getStaticPaths() {
 }
 
 // Obtener el artículo de los props
-const { article } = Astro.props || { article: { title: 'Plantilla', content: '', image: '', date: '', readingTime: 0 } };
+const { article } = Astro.props || {
+  article: {
+    title: "Plantilla",
+    content: "",
+    image: "",
+    date: "",
+    readingTime: 0,
+  },
+};
 ---
 
 <Layout
@@ -456,17 +464,21 @@ const { article } = Astro.props || { article: { title: 'Plantilla', content: '',
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background-color: var(--color-primary);
-    color: white;
+    background-color: white;
+    color: var(--color-primary);
     padding: 0.7rem 1.2rem;
     border-radius: 8px;
     text-decoration: none;
     font-weight: 500;
-    transition: background-color 0.3s;
+    transition: all 0.3s;
+    border: 2px solid var(--color-primary);
   }
 
   .download-pdf-btn:hover {
-    background-color: var(--color-primary-dark);
+    background-color: var(--color-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   /* Sidebar */

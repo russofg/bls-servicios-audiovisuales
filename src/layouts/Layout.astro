@@ -1,6 +1,9 @@
 ---
 interface Props {
   title?: string;
+  canonicalURL?: string;
+  description?: string;
+  socialImage?: string;
 }
 
 import {
@@ -13,6 +16,9 @@ import {
 
 const {
   title = "BLS Servicios Audiovisuales - Servicios técnicos para eventos",
+  canonicalURL = "https://blsnet.com.ar/",
+  description = "BLS Servicios Audiovisuales ofrece soluciones técnicas profesionales para eventos: sonido, iluminación, video y escenarios. Experiencia en eventos corporativos e institucionales en Argentina.",
+  socialImage = "/social/logo-icon.png",
 } = Astro.props;
 ---
 
@@ -23,19 +29,95 @@ const {
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image" href="/logo-icon.png" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Preload critical hero image -->
+    <link rel="preload" href="/hero-background.webp" as="image" />
+
+    <!-- SEO Metadata -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="servicios audiovisuales, sonido para eventos, iluminación para eventos, alquiler audiovisual, eventos corporativos Argentina, pantallas LED"
+    />
+    <meta name="author" content="BLS Servicios Audiovisuales" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImage} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={socialImage} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Google Discover -->
+    <meta
+      name="robots"
+      content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+
+    <!-- PWA Support -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#1a365d" />
+
+    <!-- Fonts Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <title>{title}</title>
+
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "BLS Servicios Audiovisuales",
+        "image": "https://blsnet.com.ar/logo-icon.png",
+        "url": "https://blsnet.com.ar",
+        "telephone": "+541151834646",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Catamarca 809",
+          "addressLocality": "Buenos Aires",
+          "postalCode": "C1231ABK",
+          "addressCountry": "AR"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -34.608936,
+          "longitude": -58.414488
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "17:00"
+        },
+        "sameAs": [
+          "https://www.facebook.com/blsnet.com.ar",
+          "https://www.instagram.com/blsnet.com.ar"
+        ],
+        "priceRange": "$$",
+        "description": "BLS Servicios Audiovisuales ofrece soluciones técnicas profesionales para eventos: sonido, iluminación, video y escenarios. Experiencia en eventos corporativos e institucionales."
+      }
+    </script>
   </head>
   <body>
     <header>
       <nav>
         <div>
-          <a class="logo" href="#">Bls Servicios Audiovisuales</a>
+          <a class="logo" href="/">Bls Servicios Audiovisuales</a>
         </div>
         <!-- Botón de menú hamburguesa para móvil -->
         <button
@@ -52,11 +134,11 @@ const {
         <!-- Menú de navegación -->
         <div id="navWrapper" class="nav-wrapper">
           <ul class="nav-menu">
-            <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#clientes">Clientes</a></li>
-            <li><a href="#recursos">Recursos</a></li>
-            <li><a href="#contacto" class="contact-nav-btn">Contacto</a></li>
+            <li><a href="/#sobre-nosotros">Sobre Nosotros</a></li>
+            <li><a href="/#servicios">Servicios</a></li>
+            <li><a href="/#clientes">Clientes</a></li>
+            <li><a href="/#recursos">Recursos</a></li>
+            <li><a href="/#contacto" class="contact-nav-btn">Contacto</a></li>
           </ul>
         </div>
       </nav>

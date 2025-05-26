@@ -1,6 +1,16 @@
 ---
+// Interfaces
+interface PortfolioItem {
+  id: string;
+  title: string;
+  category: string;
+  imageUrl: string;
+  description: string;
+  size: "small" | "medium" | "large";
+}
+
 // Datos para el portafolio de eventos
-const portfolioEvents = [
+const portfolioEvents: PortfolioItem[] = [
   {
     id: "event1",
     title: "AWS",
@@ -8,7 +18,7 @@ const portfolioEvents = [
     imageUrl: "/portfolio/evento-16.webp",
     description:
       "Pantallas de led, sonido , luces y silent talks para 500 asistentes.",
-    size: "large", // Define el tamaño de la imagen en el grid
+    size: "large",
   },
   {
     id: "event2",
@@ -34,7 +44,7 @@ const portfolioEvents = [
     category: "Corporativo",
     imageUrl: "/portfolio/evento-4.webp",
     description:
-      "Sistema de sonido, pantallas de led y luces en distintos espacios del DOK Haras.",
+      "Sistema linearray de sonido, pantallas de led y luces en distintos espacios del DOK Haras.",
     size: "medium",
   },
   {
@@ -138,7 +148,15 @@ const portfolioEvents = [
   },
 ];
 
-// Nota importante: Las imágenes son referencias y se deben crear o agregar en la carpeta public/portfolio/
+// Helper functions para imágenes responsivas - desactivadas por ahora
+function generateSrcSet(imageUrl: string): string {
+  // Devolvemos vacío ya que no hay imágenes responsive disponibles
+  return "";
+}
+
+function getSizes(size: PortfolioItem["size"]): string {
+  return "";
+}
 ---
 
 <section id="portfolio" class="portfolio">
@@ -150,10 +168,22 @@ const portfolioEvents = [
 
     <div class="portfolio-grid">
       {
-        portfolioEvents.map((event) => (
-          <div class={`portfolio-item ${event.size}`} data-id={event.id}>
+        portfolioEvents.map((event, index) => (
+          <div
+            class={`portfolio-item ${event.size}`}
+            data-id={event.id}
+            data-title={event.title}
+            data-category={event.category}
+            data-description={event.description}
+          >
             <div class="portfolio-image">
-              <img src={event.imageUrl} alt={event.title} />
+              <img
+                src={event.imageUrl}
+                alt={event.title}
+                loading={index < 6 ? "eager" : "lazy"}
+                decoding="async"
+                fetchpriority={index === 0 ? "high" : "auto"}
+              />
               <div class="portfolio-overlay">
                 <h3>{event.title}</h3>
                 <span class="category">{event.category}</span>
@@ -166,11 +196,17 @@ const portfolioEvents = [
   </div>
 
   <!-- Modal para ver la imagen ampliada -->
-  <div id="portfolioModal" class="portfolio-modal">
+  <div
+    id="portfolioModal"
+    class="portfolio-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+  >
     <div class="modal-content">
-      <span class="close-modal">&times;</span>
+      <button class="close-modal" aria-label="Cerrar modal">×</button>
       <div class="modal-image-container">
-        <img id="modalImage" src="" alt="" />
+        <img id="modalImage" src="" alt="" loading="eager" decoding="async" />
       </div>
       <div class="modal-details">
         <h3 id="modalTitle"></h3>
@@ -350,14 +386,17 @@ const portfolioEvents = [
 
   .modal-image-container {
     width: 100%;
-    max-height: 500px;
+    max-height: 70vh;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .modal-image-container img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
   }
 
   .modal-details {
@@ -429,190 +468,121 @@ const portfolioEvents = [
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // Datos de los eventos para usar en JavaScript
-    const portfolioEvents = [
-      {
-        id: "event1",
-        title: "AWS",
-        category: "Corporativo",
-        imageUrl: "/portfolio/evento-16.webp",
-        description:
-          "Pantallas de led, sonido , luces y silent talks para 500 asistentes.",
-      },
-      {
-        id: "event2",
-        title: "Presentacion Fiat Abarth",
-        category: "Corporativo",
-        imageUrl: "/portfolio/evento-2.webp",
-        description:
-          "Evento de lanzamiento de los nuevos Fiat Abarth, pantallas LED, iluminación ambiental y sistema de sonido distribuido.",
-      },
-      {
-        id: "event3",
-        title: "AWS",
-        category: "Coprporativo",
-        imageUrl: "/portfolio/evento-1.webp",
-        description:
-          "Pantallas de led, sonido , luces y silent talks para 500 asistentes.",
-      },
-      {
-        id: "event4",
-        title: "Awards ADIDAS",
-        category: "Corporativo",
-        imageUrl: "/portfolio/evento-4.webp",
-        description:
-          "Sistema linearray de sonido, pantallas de led y luces en distintos espacios del DOK Haras.",
-      },
-      {
-        id: "event5",
-        title: "Congreso de Alfabetización",
-        category: "Institucionales",
-        imageUrl: "/portfolio/evento-5.webp",
-        description:
-          "Pantallas de led, sonido y luces en distintas salas de Palacio Libertad.",
-      },
-      {
-        id: "event6",
-        title: "Amcham Forum",
-        category: "Institucionales",
-        imageUrl: "/portfolio/evento-6.webp",
-        description:
-          "Pantalla de led, sonido, luces y CCTV para el evento de Amcham en el Hotel Alvear Icon.",
-      },
-      {
-        id: "event7",
-        title: "Counsil of the Americas",
-        category: "Institucionales",
-        imageUrl: "/portfolio/evento-7.webp",
-        description: "Pantalla de Led, y luces",
-      },
-      {
-        id: "event8",
-        title: "Evento Alchemy",
-        category: "Corporativo",
-        imageUrl: "/portfolio/evento-8.webp",
-        description:
-          "Pantallas de led, sonido y luces para el evento de Alchemy en el Hotel Four Season.",
-      },
-      {
-        id: "event9",
-        title: "Seminario Essen",
-        category: "Corporativo",
-        imageUrl: "/portfolio/evento-9.webp",
-        description:
-          "Pantallas led, totems de led, sonido y luces para el evento de Essen en el Hotel Sofitel Cardales.",
-      },
-      {
-        id: "event10",
-        title: "Seminario Essen",
-        category: "Corporativo",
-        imageUrl: "/portfolio/evento-10.webp",
-        description:
-          "Pantallas led, totems de led, sonido y luces para el evento de Essen en el Hotel Sofitel Cardales.",
-      },
-      {
-        id: "event11",
-        title: "Regional Management Meeting LATAM 2024 - HOLCIM",
-        category: "Corporativo",
-        imageUrl: "/portfolio/evento-11.webp",
-        description:
-          "Pantallas de led, sonido y luces para el evento de Holcim en el Hotel Faena ART y Hotel Alvear Icon.",
-      },
-      {
-        id: "event12",
-        title: "Presentacion Fiat Abarth",
-        category: "Especiales",
-        imageUrl: "/portfolio/evento-12.webp",
-        description:
-          "Evento de lanzamiento de los nuevos Fiat Abarth, pantallas LED, iluminación ambiental y sistema de sonido distribuido.",
-      },
-      {
-        id: "event13",
-        title: "Presentción de Productos NewSan",
-        category: "Corporativo",
-        imageUrl: "/portfolio/evento-13.webp",
-        description:
-          "Pantallas de led y tendido electrico en El Cubo de Vicente Lopez.",
-      },
-      {
-        id: "event14",
-        title: "Presentción de Productos NewSan",
-        category: "Conciertos",
-        imageUrl: "/portfolio/evento-14.webp",
-        description:
-          "Pantallas de led y tendido electrico en El Cubo de Vicente Lopez.",
-      },
-      {
-        id: "event15",
-        title: "Seria de charlas en la Univerdidad de Torcuato Di Tella",
-        category: "Institucionales",
-        imageUrl: "/portfolio/evento-15.webp",
-        description:
-          "Producción audiovisual completa para ceremonia de inauguración con autoridades y transmisión en directo.",
-      },
-    ];
+    // Referencias DOM
+    const portfolioItems =
+      document.querySelectorAll<HTMLElement>(".portfolio-item");
+    const modal = {
+      container: document.getElementById("portfolioModal"),
+      image: document.getElementById("modalImage") as HTMLImageElement,
+      title: document.getElementById("modalTitle"),
+      category: document.getElementById("modalCategory"),
+      description: document.getElementById("modalDescription"),
+      closeBtn: document.querySelector(".close-modal"),
+    };
 
-    // Obtener referencias a elementos del DOM
-    const portfolioItems = document.querySelectorAll(".portfolio-item");
-    const modal = document.getElementById("portfolioModal");
-    const modalImage = document.getElementById("modalImage");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalCategory = document.getElementById("modalCategory");
-    const modalDescription = document.getElementById("modalDescription");
-    const closeModal = document.querySelector(".close-modal");
+    // Función para abrir el modal
+    function openModal(item: HTMLElement): void {
+      if (
+        !modal.container ||
+        !modal.image ||
+        !modal.title ||
+        !modal.category ||
+        !modal.description
+      )
+        return;
 
-    // Función para abrir el modal con los datos del evento
-    function openModal(eventId) {
-      // Encontrar el evento por su ID
-      const event = portfolioEvents.find((ev) => ev.id === eventId);
+      const img = item.querySelector("img");
+      if (!img) return;
 
-      if (event) {
-        // Establecer los datos en el modal
-        modalImage.src = event.imageUrl;
-        modalImage.alt = event.title;
-        modalTitle.textContent = event.title;
-        modalCategory.textContent = event.category;
-        modalDescription.textContent = event.description;
+      const imageUrl = img.getAttribute("src") || "";
+      const title = item.dataset.title || "";
+      const category = item.dataset.category || "";
+      const description = item.dataset.description || "";
 
-        // Mostrar el modal con animación
-        modal.classList.add("active");
-        document.body.style.overflow = "hidden"; // Prevenir scroll del body
+      console.log("Modal image URL:", imageUrl); // Para debugging
+
+      modal.image.src = imageUrl;
+      modal.image.alt = title;
+      modal.title.textContent = title;
+      modal.category.textContent = category;
+      modal.description.textContent = description;
+
+      modal.container.classList.add("active");
+      document.body.style.overflow = "hidden";
+
+      // Pre-cargar siguiente imagen
+      const nextItem = item.nextElementSibling as HTMLElement;
+      if (nextItem?.classList.contains("portfolio-item")) {
+        const nextImg = nextItem.querySelector("img");
+        if (nextImg) {
+          const nextImageUrl = nextImg.getAttribute("src");
+          if (nextImageUrl) {
+            const img = new Image();
+            img.src = nextImageUrl;
+          }
+        }
       }
     }
 
     // Función para cerrar el modal
-    function closeModalFunc() {
-      modal.classList.remove("active");
-
-      // Esperar a que termine la animación antes de ocultar completamente
+    function closeModal(): void {
+      if (!modal.container) return;
+      modal.container.classList.remove("active");
       setTimeout(() => {
-        document.body.style.overflow = ""; // Restaurar scroll
+        document.body.style.overflow = "";
       }, 300);
     }
 
-    // Añadir event listeners a los items del portfolio
+    // Event Listeners
     portfolioItems.forEach((item) => {
-      item.addEventListener("click", () => {
-        const eventId = item.getAttribute("data-id");
-        openModal(eventId);
+      item.addEventListener("click", () => openModal(item));
+    });
+
+    if (modal.closeBtn) {
+      modal.closeBtn.addEventListener("click", closeModal);
+    }
+
+    if (modal.container) {
+      modal.container.addEventListener("click", (e) => {
+        if (e.target === modal.container) closeModal();
       });
-    });
+    }
 
-    // Event listener para cerrar modal
-    closeModal.addEventListener("click", closeModalFunc);
-
-    // Cerrar modal al hacer clic fuera del contenido
-    window.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        closeModalFunc();
-      }
-    });
-
-    // Cerrar modal con tecla ESC
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && modal.classList.contains("active")) {
-        closeModalFunc();
+      if (e.key === "Escape" && modal.container?.classList.contains("active")) {
+        closeModal();
       }
     });
+
+    // Intersection Observer para lazy loading
+    const imgObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (
+            entry.isIntersecting &&
+            entry.target instanceof HTMLImageElement
+          ) {
+            const img = entry.target;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+            }
+            if (img.dataset.srcset) {
+              img.srcset = img.dataset.srcset;
+            }
+            imgObserver.unobserve(img);
+          }
+        });
+      },
+      { rootMargin: "50px" }
+    );
+
+    // Observar imágenes que están más abajo en la página
+    document
+      .querySelectorAll<HTMLImageElement>(
+        '.portfolio-image img[loading="lazy"]'
+      )
+      .forEach((img) => {
+        imgObserver.observe(img);
+      });
   });
 </script>

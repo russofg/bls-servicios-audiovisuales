@@ -27,8 +27,42 @@ const { article } = Astro.props;
 
 <Layout
   title={`${article.title} | BLS Servicios Audiovisuales Recursos Educativos`}
+  canonicalURL={`https://pruebasbls.serviciosbls.com/#recursos/${article.slug}`}
+  description={article.description}
+  socialImage={article.imageUrl}
 >
   <div class="article-page">
+    <!-- Esquema JSON-LD para el artículo -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "{article.title}",
+        "description": "{article.description}",
+        "image": "{article.imageUrl}",
+        "author": {
+          "@type": "Organization",
+          "name": "BLS Servicios Audiovisuales",
+          "url": "https://blsnet.com.ar"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "BLS Servicios Audiovisuales",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://blsnet.com.ar/logo-icon.png"
+          }
+        },
+        "datePublished": "{article.date || '2024-01-01T12:00:00+00:00'}",
+        "dateModified": "{article.lastUpdated || '2024-01-01T12:00:00+00:00'}",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://blsnet.com.ar/recursos/{article.slug}"
+        },
+        "keywords": "{article.keywords || 'audiovisual, eventos, tecnología'}"
+      }
+    </script>
+
     <!-- Botón de volver a inicio (fijo) -->
     <div class="navigation-buttons">
       <a href="/" class="nav-btn back-home-btn">

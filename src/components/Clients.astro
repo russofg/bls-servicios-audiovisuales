@@ -75,7 +75,13 @@ const stats = [
           [...clients, ...clients].map((client) => (
             <div class="carousel-item">
               <div class="client-logo">
-                <img src={client.logo} alt={`${client.name} Logo`} />
+                <img
+                  src={client.logo}
+                  alt={`${client.name} Logo`}
+                  width="150"
+                  height="100"
+                  loading="lazy"
+                />
               </div>
               <div class="client-name">{client.name}</div>
             </div>

@@ -43,7 +43,14 @@ const featuredResources = educationalResources.filter(
         educationalResources.map((resource) => (
           <div class="resource-card" data-category={resource.category}>
             <div class="resource-image">
-              <img src={resource.imageUrl} alt={resource.title} />
+              <img
+                src={resource.imageUrl}
+                alt={`${resource.title} - Recurso educativo sobre tecnología audiovisual`}
+                width="400"
+                height="300"
+                loading="lazy"
+                fetchpriority={resource.featured ? "high" : "low"}
+              />
             </div>
             <div class="category-tag">
               {
