@@ -72,7 +72,8 @@ try {
 
     $mail->setFrom(SMTP_USER, 'Formulario BLS');
     $mail->addAddress('info@blsnet.com.ar');
-    $mail->addBCC('russofg@gmail.com','bogadojonathan012@hotmail.com');
+    $mail->addBCC('russofg@gmail.com');
+    $mail->addBCC('bogadojonathan012@hotmail.com');
 
     $mail->isHTML(true);
     $mail->CharSet = 'UTF-8';
