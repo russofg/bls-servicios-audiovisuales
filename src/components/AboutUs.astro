@@ -82,7 +82,7 @@ const values = [
           src="/about-image.webp"
           alt="Equipo técnico de BLS Servicios Audiovisuales trabajando en el montaje de equipamiento audiovisual para un evento corporativo en Buenos Aires"
           width="800"
-          height="600"
+          height="400"
           loading="lazy"
         />
       </div>
@@ -193,6 +193,8 @@ const values = [
     width: 100%;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+    aspect-ratio: 16/9; /* Mantiene una proporción consistente */
   }
 
   .about-text {
@@ -371,6 +373,12 @@ const values = [
       flex-direction: column;
     }
 
+    .about-image img {
+      max-height: 300px; /* Limitar altura en móviles */
+      aspect-ratio: 1/1; /* Proporción más cuadrada en móviles */
+      object-position: center; /* Asegura que la parte central sea visible */
+    }
+
     .stats {
       flex-wrap: wrap;
       gap: 1rem;
@@ -400,6 +408,15 @@ const values = [
   }
 
   @media (max-width: 576px) {
+    .about-image {
+      margin-bottom: 1rem; /* Espacio después de la imagen */
+    }
+
+    .about-image img {
+      max-height: 250px; /* Ajustar altura para móviles pequeños */
+      aspect-ratio: 4/3; /* Proporción ligeramente rectangular pero no estirada */
+    }
+
     .stat {
       flex: 0 0 100%;
       margin-bottom: 1.5rem;
