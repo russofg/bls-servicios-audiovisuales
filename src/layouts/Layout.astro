@@ -12,6 +12,7 @@ import {
   linkedinIcon,
   instagramIcon,
   whatsappIcon,
+  heartIcon,
 } from "../utils/icons.js";
 
 const {
@@ -191,6 +192,11 @@ const {
       <div class="copyright">
         © {new Date().getFullYear()} BLS Servicios Audiovisuales. Todos los derechos
         reservados.
+      </div>
+      <div class="made-with-love">
+        Hecho con <span class="heart-icon" set:html={heartIcon} /> por <strong
+          >MateCode</strong
+        >
       </div>
     </footer>
 
@@ -467,6 +473,44 @@ const {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.6);
+  }
+
+  .made-with-love {
+    text-align: center;
+    padding-top: 1rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .made-with-love strong {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .heart-icon {
+    display: inline-flex;
+    align-items: center;
+    color: white;
+    margin: 0 4px;
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
+
+  @keyframes heartbeat {
+    0% {
+      transform: scale(1);
+    }
+    14% {
+      transform: scale(1.2);
+    }
+    28% {
+      transform: scale(1);
+    }
+    42% {
+      transform: scale(1.2);
+    }
+    70% {
+      transform: scale(1);
+    }
   }
 
   /* Menú hamburguesa móvil */
