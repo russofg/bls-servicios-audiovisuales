@@ -29,7 +29,7 @@ const tiposEvento = [
           <p><strong>Email:</strong> info@blsnet.com.ar</p>
           <p><strong>Teléfono:</strong> +54 11 5183-4646</p>
           <p>
-            <strong>Dirección:</strong> Catamarca 809, CABA, Buenos Aires, Argentina
+            <strong>Dirección:</strong> Catamarca 809 PB A, CABA, Buenos Aires, Argentina
           </p>
           <p><strong>Horario:</strong> Lunes a Viernes: 9:00 - 17:00</p>
         </div>
@@ -392,7 +392,7 @@ const tiposEvento = [
             // Si hay campos inválidos, mostrar mensaje de error
             showMessage(
               "Por favor, completa correctamente todos los campos requeridos.",
-              "error"
+              "error",
             );
             // Activar validación nativa del navegador
             contactForm.reportValidity();
@@ -423,14 +423,14 @@ const tiposEvento = [
               contactForm.reset();
               showMessage(
                 "¡Gracias por tu mensaje! Te contactaremos pronto.",
-                "success"
+                "success",
               );
             } else {
               // Error en el envío
               console.error(
                 "Error de Formspree:",
                 response.status,
-                response.statusText
+                response.statusText,
               );
 
               // Información detallada según el código de error
@@ -488,7 +488,7 @@ const tiposEvento = [
 
             showMessage(
               `Error: ${errorMsg}. Por favor, intenta nuevamente o contáctanos directamente.`,
-              "error"
+              "error",
             );
           } finally {
             // Restaurar el botón

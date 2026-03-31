@@ -7,17 +7,17 @@
     <div class="hero-content">
       <div class="logo-container">
         <img
-          src="/logo_hero.webp"
+          src="/logo_hero.png"
           alt="Logo BLS Servicios Audiovisuales"
           class="hero-logo"
-          width="300"
-          height="300"
+          width="400"
+          height="400"
         />
       </div>
-      <h1>Soluciones técnicas profesionales para tus eventos</h1>
+      <h1>Soluciones Técnicas Profesionales para tu Evento</h1>
       <p>
-        Iluminación, sonido, video y escenarios para todo tipo de eventos.
-        Hacemos que tu evento brille con equipamiento de última generación.
+        Sistemas de Sonido , Pantallas de Video, Iluminación y Escenarios para
+        todo tipo de Eventos.
       </p>
       <div class="hero-buttons">
         <a
@@ -39,10 +39,11 @@
 
 <style>
   .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
       url("/hero-background.webp");
     background-size: cover;
-    background-position: center;
+    background-position: center top;
     color: white;
     height: 100vh;
     display: flex;
@@ -50,6 +51,8 @@
     padding-top: 10vh; /* Añadido espacio superior */
     text-align: center;
     padding-bottom: 0; /* Eliminado el padding-bottom */
+    /* Sube el hero unos píxeles para eliminar línea/resolución subpíxel bajo el header fijo */
+    margin-top: -2px;
   }
 
   .hero-content {

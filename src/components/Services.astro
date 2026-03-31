@@ -1,10 +1,39 @@
 ---
 const services = [
   {
+    icon: "🎙️",
+    title: "Conferencias y Congresos",
+    description:
+      "Equipamiento específico para conferencias, traducción simultánea, streaming y grabación profesional.",
+    details: [
+      "Sistemas de conferencia con micrófonos de sobremesa para cada participante",
+      "Equipos de traducción simultánea multicanal con receptores inalámbricos",
+      "Sistemas de votación electrónica y participación interactiva",
+      "Plataformas de streaming con múltiples cámaras y soporte para redes sociales",
+      "Grabación profesional multipista de audio y video para documentación",
+    ],
+    subServices: [
+      {
+        name: "Traducción Simultánea",
+        specs:
+          "Cabinas insonorizadas y sistema de distribución para hasta 8 idiomas",
+      },
+      {
+        name: "Sistemas de Conferencia",
+        specs:
+          "Micrófonos de conferencia con funciones de presidente, delegado y control de palabra",
+      },
+      {
+        name: "Streaming Profesional",
+        specs:
+          "Transmisión en vivo a múltiples plataformas con redundancia y respaldo",
+      },
+    ],
+  },
+  {
     icon: "🔊",
     title: "Sonido Profesional",
-    description:
-      "Sistemas de sonido de alta calidad para eventos de cualquier tamaño. Incluye altavoces, mezcladores, micrófonos inalámbricos y técnicos especializados.",
+    description: "Sistemas de sonido profecional para eventos de todo tipo.",
     details: [
       "Sistemas de sonido line array de última generación para grandes audiencias",
       "Equipos de monitoreo para escenarios con tecnología InEar y floor monitors",
@@ -15,7 +44,7 @@ const services = [
     subServices: [
       {
         name: "Sonido para Conciertos",
-        specs: "Sistemas de 10.000W hasta 100.000W según capacidad del venue",
+        specs: "Sistemas de sonido según capacidad del venue",
       },
       {
         name: "Sonido para Eventos Corporativos",
@@ -26,36 +55,6 @@ const services = [
         name: "Sonido para DJ Sets",
         specs:
           "Monitores de alta potencia y subwoofers con respuesta hasta 30Hz",
-      },
-    ],
-  },
-  {
-    icon: "💡",
-    title: "Iluminación",
-    description:
-      "Iluminación arquitectónica, decorativa y escénica. Desde ambientación hasta espectáculos de luces sincronizados con música.",
-    details: [
-      "Iluminación LED profesional con mezcla de colores RGBW o RGBWA+UV",
-      "Luces móviles tipo beam, wash y spot de marcas premium",
-      "Controladores de iluminación DMX programables",
-      "Sistemas de truss y estructuras para montaje seguro",
-      "Software de programación avanzado para shows sincronizados",
-    ],
-    subServices: [
-      {
-        name: "Iluminación Escénica",
-        specs:
-          "Sistemas completos para escenarios con luces frontales, cenital y contraluces",
-      },
-      {
-        name: "Iluminación Arquitectónica",
-        specs:
-          "Bañadores de pared, uplights y proyectores para destacar espacios",
-      },
-      {
-        name: "Iluminación Decorativa",
-        specs:
-          "Guirnaldas, tubos LED pixel, elementos personalizados y efectos especiales",
       },
     ],
   },
@@ -88,64 +87,56 @@ const services = [
     ],
   },
   {
+    icon: "💡",
+    title: "Iluminación",
+    description:
+      "Iluminación arquitectónica, decorativa y escénica. Desde ambientación hasta espectáculos de luces sincronizados con música.",
+    details: [
+      "Iluminación LED profesional",
+      "Luces móviles tipo beam, wash y spot de marcas premium",
+      "Controladores de iluminación DMX programables",
+      "Sistemas de truss y estructuras para montaje seguro",
+      "Software de programación avanzado para shows sincronizados",
+    ],
+    subServices: [
+      {
+        name: "Iluminación Escénica",
+        specs:
+          "Sistemas completos para escenarios con luces frontales, cenitales y contraluces",
+      },
+      {
+        name: "Iluminación Arquitectónica",
+        specs:
+          "Bañadores de pared, uplights y proyectores para destacar espacios",
+      },
+      {
+        name: "Iluminación Decorativa",
+        specs:
+          "Guirnaldas, tubos LED pixel, elementos personalizados y efectos especiales",
+      },
+    ],
+  },
+
+  {
     icon: "🎭",
     title: "Escenarios y Estructuras",
     description:
-      "Montaje de escenarios, gradas, carpas y estructuras temporales con las máximas garantías de seguridad.",
+      "Montaje de escenarios y estructuras temporales con las máximas garantías de seguridad. Certificados de inifugado",
     details: [
-      "Escenarios modulares certificados para diferentes capacidades de carga",
+      "Escenarios modulares para diferentes capacidades de carga",
       "Estructuras de truss para rigging de equipamiento técnico",
       "Tarimas, pasarelas y rampas de acceso con barandillas de seguridad",
-      "Gradas y tribunas para audiencia con certificación de seguridad",
       "Cubiertas, techos y protección para equipos en exteriores",
     ],
     subServices: [
       {
-        name: "Escenarios para Conciertos",
-        specs:
-          "Estructuras hasta 20m de ancho con capacidad para soportar equipamiento pesado",
-      },
-      {
-        name: "Estructuras para Ferias",
+        name: "Estructuras para Ferias y Stands",
         specs:
           "Sistemas modulares adaptables a diferentes configuraciones y necesidades",
       },
-      {
-        name: "Gradas y Zonas VIP",
-        specs: "Plataformas elevadas con acceso seguro y acabados premium",
-      },
     ],
   },
-  {
-    icon: "🎙️",
-    title: "Conferencias y Congresos",
-    description:
-      "Equipamiento específico para conferencias, traducción simultánea, streaming y grabación profesional.",
-    details: [
-      "Sistemas de conferencia con micrófonos de sobremesa para cada participante",
-      "Equipos de traducción simultánea multicanal con receptores inalámbricos",
-      "Sistemas de votación electrónica y participación interactiva",
-      "Plataformas de streaming con múltiples cámaras y soporte para redes sociales",
-      "Grabación profesional multipista de audio y video para documentación",
-    ],
-    subServices: [
-      {
-        name: "Traducción Simultánea",
-        specs:
-          "Cabinas insonorizadas y sistema de distribución para hasta 8 idiomas",
-      },
-      {
-        name: "Sistemas de Conferencia",
-        specs:
-          "Micrófonos de conferencia con funciones de presidente, delegado y control de palabra",
-      },
-      {
-        name: "Streaming Profesional",
-        specs:
-          "Transmisión en vivo a múltiples plataformas con redundancia y respaldo",
-      },
-    ],
-  },
+
   {
     icon: "🎮",
     title: "Efectos Especiales",
@@ -154,7 +145,7 @@ const services = [
     details: [
       "Máquinas de humo bajo, medio y alto con control DMX",
       "Sistemas de CO2 con jets y cryocanones para efectos explosivos",
-      "Lanzadores de confeti, serpentinas y papel para momentos culminantes",
+      "Lanzadores de confettis, serpentinas y papel para momentos culminantes",
       "Pirotecnia fría y fuentes frías con certificación para uso interior",
       "Burbujas, nieve artificial y efectos personalizados",
     ],
@@ -167,7 +158,7 @@ const services = [
       {
         name: "Efectos de Impacto",
         specs:
-          "CO2, confeti, chispas frías y lanzallamas para momentos culminantes",
+          "CO2, confettis, chispas frías y lanzallamas para momentos culminantes",
       },
       {
         name: "Efectos Personalizados",

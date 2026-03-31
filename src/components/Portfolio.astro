@@ -13,29 +13,28 @@ interface PortfolioItem {
 const portfolioEvents: PortfolioItem[] = [
   {
     id: "event1",
-    title: "AWS",
+    title: "Presentción de Productos NewSan",
     category: "Corporativo",
-    imageUrl: "/portfolio/evento-16.webp",
+    imageUrl: "/portfolio/evento-13.webp",
     description:
       "Pantallas de led, sonido , luces y silent talks para 500 asistentes.",
     size: "large",
   },
   {
     id: "event2",
-    title: "Presentacion Fiat Abarth",
-    category: "Especiales",
-    imageUrl: "/portfolio/evento-2.webp",
+    title: "Amcham Forum",
+    category: "Institucionales",
+    imageUrl: "/portfolio/evento-21.webp",
     description:
-      "Evento de lanzamiento de los nuevos Fiat Abarth, pantallas LED, iluminación ambiental y sistema de sonido distribuido.",
+      "Pantalla de led, sonido, luces y CCTV para el evento de Amcham en el Hotel Alvear Icon.",
     size: "medium",
   },
   {
     id: "event3",
-    title: "AWS",
+    title: "Noblex",
     category: "Coprporativo",
-    imageUrl: "/portfolio/evento-1.webp",
-    description:
-      "Pantallas de led, sonido , luces y silent talks para 500 asistentes.",
+    imageUrl: "/portfolio/evento-23.webp",
+    description: "Pantallas de led, sonido , luces.",
     size: "medium",
   },
   {
@@ -49,11 +48,10 @@ const portfolioEvents: PortfolioItem[] = [
   },
   {
     id: "event5",
-    title: "Congreso de Alfabetización",
+    title: "Seminario Laboratorio Keytruda",
     category: "Institucionales",
-    imageUrl: "/portfolio/evento-5.webp",
-    description:
-      "Pantallas de led, sonido y luces en distintas salas de Palacio Libertad.",
+    imageUrl: "/portfolio/evento-24.webp",
+    description: "Pantallas de led, sonido, CCTV y luces en Alvear Icon.",
     size: "small",
   },
   {
@@ -93,11 +91,10 @@ const portfolioEvents: PortfolioItem[] = [
   },
   {
     id: "event10",
-    title: "Seminario Essen",
+    title: "Presentacion de Producto",
     category: "Corporativo",
-    imageUrl: "/portfolio/evento-10.webp",
-    description:
-      "Pantallas led, totems de led, sonido y luces para el evento de Essen en el Hotel Sofitel Cardales.",
+    imageUrl: "/portfolio/evento-19.webp",
+    description: "Pantallas led, cubos Led en Hipodromo de Palermo.",
     size: "medium",
   },
   {
@@ -131,7 +128,7 @@ const portfolioEvents: PortfolioItem[] = [
   {
     id: "event14",
     title: "Presentción de Productos NewSan",
-    category: "Conciertos",
+    category: "Corporativo",
     imageUrl: "/portfolio/evento-14.webp",
     description:
       "Pantallas de led y tendido electrico en El Cubo de Vicente Lopez.",
@@ -145,6 +142,24 @@ const portfolioEvents: PortfolioItem[] = [
     description:
       "Producción audiovisual completa para ceremonia de inauguración con autoridades y transmisión en directo.",
     size: "small",
+  },
+  {
+    id: "event16",
+    title: "Amcham Forum",
+    category: "Institucionales",
+    imageUrl: "/portfolio/evento-20.webp",
+    description:
+      "Pantalla de led, sonido, luces y CCTV para el evento de Amcham en el Hotel Alvear Icon.",
+    size: "large",
+  },
+  {
+    id: "event17",
+    title: "Entrega de Premios Lapiz de Platino",
+    category: "Especiales",
+    imageUrl: "/portfolio/evento-22.webp",
+    description:
+      "Pantallas de led, sonido y luces para la Entrega de los premio Lapiz de Platino.",
+    size: "medium",
   },
 ];
 
@@ -573,13 +588,13 @@ function getSizes(size: PortfolioItem["size"]): string {
           }
         });
       },
-      { rootMargin: "50px" }
+      { rootMargin: "50px" },
     );
 
     // Observar imágenes que están más abajo en la página
     document
       .querySelectorAll<HTMLImageElement>(
-        '.portfolio-image img[loading="lazy"]'
+        '.portfolio-image img[loading="lazy"]',
       )
       .forEach((img) => {
         imgObserver.observe(img);
